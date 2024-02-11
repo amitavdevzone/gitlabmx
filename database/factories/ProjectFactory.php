@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 
 class ProjectFactory extends Factory
 {
