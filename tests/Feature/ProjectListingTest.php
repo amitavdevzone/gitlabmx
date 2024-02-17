@@ -7,7 +7,7 @@ use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
 
-it('it shows a list of projects', function () {
+it('shows a list of projects', function () {
     // Arrange
     $projectA = Project::factory()->create();
     $projectB = Project::factory()->create();
@@ -24,7 +24,7 @@ it('it shows a list of projects', function () {
     // Assert
 });
 
-it('it shows the project with latest activity on top', function () {
+it('shows the project with latest activity on top', function () {
     // Arrange
     $projectA = Project::factory()->create(['updated_at' => now()->subDay()]);
     $projectB = Project::factory()->create(['updated_at' => now()]);
@@ -37,7 +37,7 @@ it('it shows the project with latest activity on top', function () {
         ]);
 });
 
-it('it shows n projects only', function () {
+it('shows n projects only', function () {
     // Arrange
     Project::factory()->count(10)->create();
     $projectNext = Project::factory()->create(['updated_at' => now()->subDay(), 'name' => 'Test project']);
