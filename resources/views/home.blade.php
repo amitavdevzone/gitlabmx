@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html data-theme="winter" lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     @vite('resources/css/app.css')
+    <title>{{ config('app.name') }}</title>
 </head>
-<body>
-    <div class="container mx-auto">
-        <div class="px-6 mt-8">
+<body class="bg-gray-50 antialiased text-gray-700">
+    @include('layout.navbar')
+    <div class="container mx-auto min-h-screen">
+        <div class="my-4 py-12 bg-white rounded-md shadow">
             @yield('content')
         </div>
     </div>
