@@ -8,4 +8,9 @@ class GitlabService
     {
         return config('services.gitlab.pat');
     }
+
+    public function fetchGitlabProject(int $projectId): array
+    {
+        return [];
+    }
 }

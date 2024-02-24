@@ -12,11 +12,13 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
-            'project_id' => $this->faker->randomNumber(),
-            'name_with_namespace' => $this->faker->name(),
-            'web_url' => $this->faker->url(),
-            'visibility' => $this->faker->word(),
+            'project_id' => fake()->numberBetween(111, 999),
+            'name' => fake()->word(),
+            'name_with_namespace' => fake()->word(),
+            'description' => fake()->sentence(),
+            'web_url' => fake()->url(),
+            'visibility' => 'private',
+            'project_created_date' => now(),
         ];
     }
 }

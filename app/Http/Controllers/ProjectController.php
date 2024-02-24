@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FetchGitlabProjectEvent;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,15 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
+        $postData = $request->validate([
+            'project_id' => 'required|integer|unique:projects,project_id',
+        ]);
+
+        event(new FetchGitlabProjectEvent(projectId: $postData['project_id']));
+
+        return redirect()
+            ->back()
+            ->with('success', 'Project queued for fetch');
     }
 
     public function show($id)

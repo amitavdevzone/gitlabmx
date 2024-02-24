@@ -21,7 +21,6 @@ class GitlabFetchProjectsRequest extends Request
         ];
     }
 
-
     /**
      * The endpoint for the request
      */
