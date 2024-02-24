@@ -15,7 +15,7 @@
                         {{request()->routeIs('home') ? 'border-b-2 border-blue-500' : ''}}">Home</a>
 
                     <a href="{{route('projects.index')}}" class="py-6 block opacity-80
-                    {{request()->routeIs('projects.index') ? 'border-b-2 border-blue-500' : ''}}">Project</a>
+                    {{request()->routeIs('projects.index') ? 'border-b-2 border-blue-500' : ''}}">Projects</a>
                 </div>
             </div>
             <div>User menu</div>
@@ -23,5 +23,7 @@
     </div>
 </div>
 <div class="bg-white shadow-sm">
-    @yield('title')
+    <div class="container mx-auto py-6 flex items-center justify-between">
+        @yield('title', config('app.name'))
+    </div>
 </div>

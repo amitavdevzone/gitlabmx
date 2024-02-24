@@ -1,13 +1,17 @@
-@extends('home')
+@extends('layout.app')
 
 @section('title')
-    <div class="container mx-auto py-6">
-        <div class="text-lg font-bold">Dashboard</div>
+    <div class="text-lg font-bold">
+        Project list
+    </div>
+    <div>
+        <a href="{{ route('projects.create') }}" class="btn btn-primary btn-sm rounded shadow text-white">Add
+            project</a>
     </div>
 @endsection
 
 @section('content')
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto bg-white rounded-md shadow-md p-6">
         <table class="table">
             <!-- head -->
             <thead>
@@ -25,7 +29,7 @@
                             <div class="avatar">
                                 <div class="mask mask-squircle w-8 h-8">
                                     <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png"
-                                         alt="{{ $project->name }}" />
+                                         alt="Avatar Tailwind CSS Component"/>
                                 </div>
                             </div>
                             <div>
@@ -35,9 +39,9 @@
                         </div>
                     </td>
                     <td>
-                        <span class="font-bold underline">
-                            <a href="#">{{ ucfirst($project->name) }}</a>
-                        </span>
+                            <span class="font-bold underline">
+                                <a href="#">{{ $project->name }}</a>
+                            </span>
                         <br/>
                         <span class="badge badge-ghost badge-sm">{{ $project->name_with_namespace }}</span>
                     </td>
@@ -51,7 +55,5 @@
         </table>
     </div>
 
-    <div class="px-8 py-8">
-        {{ $projects->links() }}
-    </div>
+    {{ $projects->links() }}
 @endsection
