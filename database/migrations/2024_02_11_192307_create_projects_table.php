@@ -10,11 +10,15 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_id')->index();
+
             $table->string('name');
-            $table->unsignedBigInteger('project_id');
             $table->string('name_with_namespace');
-            $table->string('web_url');
+            $table->text('description')->nullable();
+            $table->string('web_url')->nullable();
             $table->string('visibility');
+
+            $table->timestamp('project_created_date');
             $table->timestamps();
         });
     }

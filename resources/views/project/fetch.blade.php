@@ -34,7 +34,7 @@
                     <div class="mt-2 w-2/3">
                         <x-input-text name="project_id" label="" placeholder="Enter gitlab project id here."/>
                         @error('project_id')
-                        <x-input-error message="{{$message}}"/>
+                            <x-input-error message="{{$message}}"/>
                         @enderror
                     </div>
                 </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Integrations\Gitlab;
 
 use App\Services\GitlabService;
-use Saloon\Contracts\Authenticator;
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
@@ -23,6 +22,7 @@ class GitlabConnector extends Connector
     protected function defaultAuth(): TokenAuthenticator
     {
         $gitlabService = app()->make(GitlabService::class);
+
         return new TokenAuthenticator($gitlabService->getAccessToken());
     }
 
