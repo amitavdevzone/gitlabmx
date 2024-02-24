@@ -5,12 +5,13 @@ namespace App\Http\Integrations\Gitlab\Requests;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GitlabFetchProjectsRequest extends Request
+class GitlabFetchProjectRequest extends Request
 {
-    /**
-     * The HTTP method of the request
-     */
     protected Method $method = Method::GET;
+
+    public function __construct(
+        private readonly int $projectID
+    ) {}
 
     protected function defaultQuery(): array
     {
@@ -21,11 +22,8 @@ class GitlabFetchProjectsRequest extends Request
         ];
     }
 
-    /**
-     * The endpoint for the request
-     */
     public function resolveEndpoint(): string
     {
-        return '/projects';
+        return "/projects/{$this->projectID}";
     }
 }
