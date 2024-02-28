@@ -39,9 +39,10 @@
                         </div>
                     </td>
                     <td>
-                            <span class="font-bold underline">
-                                <a href="#">{{ $project->name }}</a>
-                            </span>
+                    <td>
+                        <span class="font-bold underline">
+                            <a href="{{ route('issues.index', ['project' => $project]) }}">{{ $project->name }}</a>
+                        </span>
                         <br/>
                         <span class="badge badge-ghost badge-sm">{{ $project->name_with_namespace }}</span>
                     </td>

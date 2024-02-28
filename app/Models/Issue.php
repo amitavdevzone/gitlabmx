@@ -26,4 +26,9 @@ class Issue extends Model
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
+
+    public function assigned(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assigned_to', 'gitlab_id');
+    }
 }

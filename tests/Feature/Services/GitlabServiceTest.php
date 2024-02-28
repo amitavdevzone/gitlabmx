@@ -12,7 +12,7 @@ uses(RefreshDatabase::class);
 
 it('creates a project when the project is not present', function () {
     // Arrange
-    $sampleData = json_decode(file_get_contents(__DIR__ . '/../../Fixtures/gitlabproject.json'), true);
+    $sampleData = json_decode(file_get_contents(__DIR__.'/../../Fixtures/gitlabproject.json'), true);
 
     MockClient::global([
         GitlabFetchProjectRequest::class => MockResponse::make(

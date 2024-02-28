@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -27,4 +28,17 @@ it('shows the project fetch page', function () {
 
     // Assert
     get(route('projects.create'))->assertOk();
+});
+
+it('shows the project issue list page', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project]))
+        ->assertOk();
 });

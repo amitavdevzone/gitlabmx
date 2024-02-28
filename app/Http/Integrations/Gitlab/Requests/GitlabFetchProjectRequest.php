@@ -11,7 +11,8 @@ class GitlabFetchProjectRequest extends Request
 
     public function __construct(
         private readonly int $projectID
-    ) {}
+    ) {
+    }
 
     protected function defaultQuery(): array
     {
