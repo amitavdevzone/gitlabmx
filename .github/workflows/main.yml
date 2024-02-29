@@ -1,4 +1,4 @@
-name: Gitlab MX
+name: Laravel CI
 
 on:
   push:
@@ -16,10 +16,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies and build frontend assets
+        run: |
+          npm install
+          npm run build
 
       - name: Build and Test
         run: |
-          docker build -t gitlabmx .
-          docker run -it gitlabmx
+          docker build -t amitavroy/gitlabmx_test .
+          docker run -it amitavroy/gitlabmx_test vendor/bin/pest
