@@ -28,5 +28,5 @@ jobs:
 
       - name: Build and Test
         run: |
-          docker build -t amitavroy/gitlabmx_test .
+          docker build -t amitavroy/gitlabmx_test:0.0.1 .
           docker run -it amitavroy/gitlabmx_test vendor/bin/pest
