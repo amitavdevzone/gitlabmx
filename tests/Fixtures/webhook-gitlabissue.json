@@ -1,0 +1,121 @@
+{
+    "object_kind": "issue",
+    "event_type": "issue",
+    "user": {
+        "id": 5,
+        "name": "Amitav Roy",
+        "username": "amitav.roy",
+        "avatar_url": "https:\/\/gitlab.focalworks.in\/uploads\/-\/system\/user\/avatar\/5\/avatar.png",
+        "email": "amitav.roy@focalworks.in"
+    },
+    "project": {
+        "id": 492,
+        "name": "blogs",
+        "description": null,
+        "web_url": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs",
+        "avatar_url": null,
+        "git_ssh_url": "git@gitlab.focalworks.in:amitav.roy\/blogs.git",
+        "git_http_url": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs.git",
+        "namespace": "Amitav Roy",
+        "visibility_level": 0,
+        "path_with_namespace": "amitav.roy\/blogs",
+        "default_branch": "main",
+        "ci_config_path": null,
+        "homepage": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs",
+        "url": "git@gitlab.focalworks.in:amitav.roy\/blogs.git",
+        "ssh_url": "git@gitlab.focalworks.in:amitav.roy\/blogs.git",
+        "http_url": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs.git"
+    },
+    "object_attributes": {
+        "author_id": 5,
+        "closed_at": null,
+        "confidential": false,
+        "created_at": "2024-02-18 10:06:27 +0530",
+        "description": null,
+        "discussion_locked": null,
+        "due_date": null,
+        "id": 10063,
+        "iid": 2,
+        "last_edited_at": null,
+        "last_edited_by_id": null,
+        "milestone_id": null,
+        "moved_to_id": null,
+        "duplicated_to_id": null,
+        "project_id": 492,
+        "relative_position": null,
+        "state_id": 1,
+        "time_estimate": 0,
+        "title": "Look at Gemini for blog",
+        "updated_at": "2024-02-18 10:06:27 +0530",
+        "updated_by_id": null,
+        "url": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs\/-\/issues\/2",
+        "total_time_spent": 0,
+        "time_change": 0,
+        "human_total_time_spent": null,
+        "human_time_change": null,
+        "human_time_estimate": null,
+        "assignee_ids": [
+            5
+        ],
+        "assignee_id": 5,
+        "labels": [],
+        "state": "opened",
+        "severity": "unknown",
+        "customer_relations_contacts": [],
+        "action": "open"
+    },
+    "labels": [],
+    "changes": {
+        "author_id": {
+            "previous": null,
+            "current": 5
+        },
+        "created_at": {
+            "previous": null,
+            "current": "2024-02-18 10:06:27 +0530"
+        },
+        "description": {
+            "previous": null,
+            "current": null
+        },
+        "id": {
+            "previous": null,
+            "current": 10063
+        },
+        "iid": {
+            "previous": null,
+            "current": 2
+        },
+        "project_id": {
+            "previous": null,
+            "current": 492
+        },
+        "time_estimate": {
+            "previous": null,
+            "current": 0
+        },
+        "title": {
+            "previous": null,
+            "current": "Look at Gemini for blog"
+        },
+        "updated_at": {
+            "previous": null,
+            "current": "2024-02-18 10:06:27 +0530"
+        }
+    },
+    "repository": {
+        "name": "blogs",
+        "url": "git@gitlab.focalworks.in:amitav.roy\/blogs.git",
+        "description": null,
+        "homepage": "https:\/\/gitlab.focalworks.in\/amitav.roy\/blogs"
+    },
+    "assignees": [
+        {
+            "id": 5,
+            "name": "Amitav Roy",
+            "username": "amitav.roy",
+            "avatar_url": "https:\/\/gitlab.focalworks.in\/uploads\/-\/system\/user\/avatar\/5\/avatar.png",
+            "email": "amitav.roy@focalworks.in"
+        }
+    ]
+}

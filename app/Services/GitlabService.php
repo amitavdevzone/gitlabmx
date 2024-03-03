@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Integrations\Gitlab\GitlabConnector;
 use App\Http\Integrations\Gitlab\Requests\GitlabFetchProjectRequest;
+use App\Models\Issue;
 use App\Models\Project;
 use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -64,5 +65,31 @@ class GitlabService
                 'description' => $projectData['description'],
                 'updated_at' => Carbon::parse($projectData['last_activity_at']),
             ]);
+    }
+
+    public function createOrUpdateIssue(array $gitlabIssueData): void
+    {
+        Issue::updateOrInsert(
+            ['gitlab_id' => $gitlabIssueData['id'], 'project_id' => $gitlabIssueData['project_id']],
+            [
+                'gitlab_id' => $gitlabIssueData['id'],
+                'internal_id' => $gitlabIssueData['iid'],
+                'project_id' => $gitlabIssueData['project_id'],
+                'assigned_to' => $gitlabIssueData['assignee_id'] ?? null,
+                'title' => $gitlabIssueData['title'],
+                'description' => $gitlabIssueData['description'] ?? '',
+                'state' => $gitlabIssueData['state'],
+                'closed_at' => Carbon::parse($gitlabIssueData['closed_at']) ?? null,
+                'closed_by' => $gitlabIssueData['closed_by']['id'] ?? null,
+                'labels' => json_encode($gitlabIssueData['labels']) ?? null,
+                'assignees' => json_encode($gitlabIssueData['assignees'] ?? []),
+                'created_at' => Carbon::parse($gitlabIssueData['created_at']),
+                'updated_at' => Carbon::parse($gitlabIssueData['updated_at']),
+            ]
+        );
+
+        Project::query()
+            ->where('project_id', $gitlabIssueData['project_id'])
+            ->update(['updated_at' => Carbon::parse($gitlabIssueData['updated_at'])]);
     }
 }
