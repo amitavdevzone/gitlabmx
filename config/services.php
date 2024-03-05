@@ -34,6 +34,7 @@ return [
     'gitlab' => [
         'pat' => env('GITLAB_PAT', ''),
         'base_url' => env('GITLAB_BASE_URL', ''),
+        'secret_token' => env('GITLAB_SECRET_TOKEN', ''),
     ],
 
 ];

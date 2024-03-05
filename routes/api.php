@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GitlabWebhookController;
+use App\Http\Middleware\GitlabTokenMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('gitlab-webhooks', GitlabWebhookController::class)
-    ->name('gitlab-webhooks');
+    ->name('gitlab-webhooks')
+    ->middleware([GitlabTokenMiddleware::class]);

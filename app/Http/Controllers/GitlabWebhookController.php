@@ -14,10 +14,6 @@ class GitlabWebhookController extends Controller
 
     public function __invoke(Request $request): Response
     {
-        if ($request->header('X-Gitlab-Token') != 'password') {
-            return response([], status: 401);
-        }
-
         $payload = $request->all();
 
         if (! array_key_exists($payload['event_type'], $this->supportedEvents)) {
