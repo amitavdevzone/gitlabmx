@@ -10,7 +10,7 @@ class GitlabTokenMiddleware
     public function handle(Request $request, Closure $next)
     {
         // Check for the presence of the header
-        if (!$request->hasHeader('X-Gitlab-Token')) {
+        if (! $request->hasHeader('X-Gitlab-Token')) {
             return response()->json(['message' => 'Unauthorized: Missing Gitlab token'], 401);
         }
 

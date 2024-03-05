@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Issue;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,5 +41,15 @@ it('shows the project issue list page', function () {
 
     // Assert
     get(route('issues.index', ['project' => $project]))
+        ->assertOk();
+});
+
+it('shows the issue detail view', function () {
+    // Arrange
+    $project = Project::factory()->create();
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
+    // Act & Assert
+    get(route('issues.show', ['project' => $project, 'issue' => $issue]))
         ->assertOk();
 });

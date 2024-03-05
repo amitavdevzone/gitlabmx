@@ -37,7 +37,7 @@ it('gives a 401 when the token is wrong', function () {
 
     // Act & Assert
     postJson(route('gitlab-webhooks'), $sampleData, [
-        'X-Gitlab-Token' => config('services.gitlab.secret_token') . '-add-random',
+        'X-Gitlab-Token' => config('services.gitlab.secret_token').'-add-random',
     ])->assertUnauthorized();
 });
 

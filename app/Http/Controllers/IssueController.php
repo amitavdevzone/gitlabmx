@@ -20,4 +20,11 @@ class IssueController extends Controller
         return view('pages.issue.index')
             ->with('issues', $issues);
     }
+
+    public function show(Project $project, Issue $issue)
+    {
+        return view('pages.issue.view')
+            ->with('project', $project)
+            ->with('issue', $issue);
+    }
 }
