@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('gitlab-webhooks', GitlabWebhookController::class)->name('gitlab-webhooks');
+Route::post('gitlab-webhooks', GitlabWebhookController::class)
+    ->name('gitlab-webhooks');

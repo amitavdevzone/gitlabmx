@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\Gitlab\IssueWebhookHandler;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Validation\UnauthorizedException;
 
 class GitlabWebhookController extends Controller
 {
@@ -16,7 +15,7 @@ class GitlabWebhookController extends Controller
     public function __invoke(Request $request): Response
     {
         if ($request->header('X-Gitlab-Token') != 'password') {
-            throw new UnauthorizedException('Wrong token');
+            return response([], status: 401);
         }
 
         $payload = $request->all();
