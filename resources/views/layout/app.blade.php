@@ -10,7 +10,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 </head>
 <body class="bg-gray-50 antialiased text-gray-700">
-@include('layout.navbar')
+@auth
+    @include('layout.navbar')
+@endauth
 <div class="container mx-auto min-h-screen">
     <div class="my-8 px-6">
         @yield('content')
