@@ -15,6 +15,7 @@ it('shows the home page', function () {
 });
 
 it('shows the project listing page', function () {
+    $this->actingAs(User::factory()->create());
     // Act & Assert
     get(route('projects.index'))
         ->assertOk();
@@ -29,6 +30,11 @@ it('shows the project fetch page', function () {
 
     // Assert
     get(route('projects.create'))->assertOk();
+});
+
+it('shows the login page', function () {
+    get(route('login'))
+        ->assertOk();
 });
 
 it('shows the project issue list page', function () {
@@ -48,6 +54,8 @@ it('shows the issue detail view', function () {
     // Arrange
     $project = Project::factory()->create();
     $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
+    $this->actingAs(User::factory()->create());
 
     // Act & Assert
     get(route('issues.show', ['project' => $project, 'issue' => $issue]))
