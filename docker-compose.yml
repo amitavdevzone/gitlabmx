@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
     php:
-        image: serversideup/php:8.2-fpm-nginx-v2.0.2
+        image: serversideup/php:8.2-fpm-nginx-v2.2.1
         container_name: "labmx-php"
         ports:
-            - "8080:80" # Adjust port if needed
+            - "8000:80" # Adjust port if needed
         volumes:
             - .:/var/www/html
         environment:
@@ -17,7 +17,7 @@ services:
             - node
             - redis
     node:
-        image: node:alpine3.18
+        image: node:alpine3.19
         container_name: "labmx-node"
         working_dir: "/usr/app"
         volumes:
@@ -25,8 +25,20 @@ services:
         command: "npm run dev"
         ports:
             - "5173:5173" # Adjust port if needed
+    dbadmin:
+        image: phpmyadmin
+        container_name: "labmx_dbadmin"
+        ports:
+            - "8080:80"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_USERNAME}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            PMA_HOST: mysql
+        depends_on:
+         - mysql
     mysql:
-        image: mysql:8.0
+        image: mysql:8.3.0
         container_name: "labmx-db"
         ports:
             - "3306:3306" # Adjust port if needed
@@ -38,7 +50,7 @@ services:
         volumes:
             - ./data/mysql-data:/var/lib/mysql
     redis:
-        image: redis:latest
+        image: redis:7.2.4
         container_name: "labmx-redis"
         ports:
             - "63790:63790" # Adjust port if needed
