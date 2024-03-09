@@ -14,7 +14,7 @@
     @include('layout.navbar')
 @endauth
 <div class="container mx-auto min-h-screen">
-    <div class="my-8 px-6">
+    <div class="px-6">
         @yield('content')
     </div>
 </div>

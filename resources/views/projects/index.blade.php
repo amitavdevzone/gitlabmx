@@ -39,7 +39,6 @@
                         </div>
                     </td>
                     <td>
-                    <td>
                         <span class="font-bold underline">
                             <a href="{{ route('issues.index', ['project' => $project]) }}">{{ $project->name }}</a>
                         </span>
@@ -56,5 +55,7 @@
         </table>
     </div>
 
-    {{ $projects->links() }}
+    <div class="pt-6">
+        {{ $projects->links() }}
+    </div>
 @endsection
