@@ -151,7 +151,7 @@ it('shows the issue author name', function () {
 
     // Assert
     get(route('issues.index', ['project' => $project]))
-        ->assertDontSeeText([
+        ->assertSeeText([
             'Author '.$user->name,
         ])
         ->assertOk();

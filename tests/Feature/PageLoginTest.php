@@ -13,7 +13,7 @@ it('shows the login form', function () {
     // Act & Assert
     get(route('login'))
         ->assertSeeText([
-            'Please login',
+            'LabMx Login',
             'Enter your email address',
             'Enter your password',
         ]);

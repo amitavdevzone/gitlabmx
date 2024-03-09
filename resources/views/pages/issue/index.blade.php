@@ -20,7 +20,9 @@
                         </div>
                         <div class="text-sm text-gray-400 flex">
                             <div class="mr-4">{{ $issue->state }}</div>
-                            <div>Author <span class="text-gray-900">{{ $issue->author->name }}</span></div>
+                            @if($issue->author)
+                                <div>Author <span class="text-gray-900">{{ $issue->author->name }}</span></div>
+                            @endif
                         </div>
                         <div class="inline-flex mt-2 opacity-90 text-white">
                             @if(count($issue->labels) > 0)
