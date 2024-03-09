@@ -16,7 +16,7 @@ class Issue extends Model
     }
 
     protected $fillable = [
-        'gitlab_id', 'internal_id', 'project_id', 'closed_by', 'title', 'description', 'state', 'closed_at', 'labels',
+        'gitlab_id', 'internal_id', 'project_id', 'author_id', 'closed_by', 'title', 'description', 'state', 'closed_at', 'labels',
         'assignees', 'due_date', 'assigned_to',
     ];
 
@@ -35,5 +35,10 @@ class Issue extends Model
     public function assigned(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_to', 'gitlab_id');
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id', 'gitlab_id');
     }
 }

@@ -75,6 +75,7 @@ class GitlabService
                 'gitlab_id' => $gitlabIssueData['id'],
                 'internal_id' => $gitlabIssueData['iid'],
                 'project_id' => $gitlabIssueData['project_id'],
+                'author_id' => $gitlabIssueData['author_id'] ?? null,
                 'assigned_to' => $gitlabIssueData['assignee_id'] ?? null,
                 'title' => $gitlabIssueData['title'],
                 'description' => $gitlabIssueData['description'] ?? '',

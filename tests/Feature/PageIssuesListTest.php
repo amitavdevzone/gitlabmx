@@ -124,7 +124,7 @@ it('shows assigned to user when assigned', function () {
         ->assertOk();
 });
 
-it('it does not show assigned to when issue not assigned', function () {
+it('does not show assigned to when issue not assigned', function () {
     $user = User::factory()->create(['name' => 'Mr. Xavier Troller']);
     $project = Project::factory()->create();
     Issue::factory()->create(['assigned_to' => 99, 'project_id' => $project->project_id]);
@@ -136,6 +136,23 @@ it('it does not show assigned to when issue not assigned', function () {
     get(route('issues.index', ['project' => $project]))
         ->assertDontSeeText([
             'Assigned to '.$user->name,
+        ])
+        ->assertOk();
+});
+
+it('shows the issue author name', function () {
+    // Arrange
+    $user = User::factory()->create(['name' => 'Mr. Xavier Troller']);
+    $project = Project::factory()->create();
+    Issue::factory()->create(['author_id' => $user->gitlab_id, 'project_id' => $project->project_id]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project]))
+        ->assertDontSeeText([
+            'Author '.$user->name,
         ])
         ->assertOk();
 });

@@ -17,6 +17,7 @@ class IssueFactory extends Factory
             'gitlab_id' => $this->faker->randomNumber(),
             'internal_id' => $this->faker->randomNumber(),
             'project_id' => $this->faker->randomNumber(),
+            'author_id' => $this->faker->randomNumber(),
             'assigned_to' => $this->faker->randomNumber(),
             'title' => $this->faker->unique()->word(),
             'description' => $this->faker->text(),

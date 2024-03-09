@@ -12,7 +12,7 @@ class IssueController extends Controller
     {
         $issues = Issue::query()
             ->whereState(IssueStateEnum::OPENED)
-            ->with('assigned')
+            ->with(['assigned', 'author'])
             ->where('project_id', $project->project_id)
             ->latest('updated_at')
             ->paginate(10);

@@ -1,3 +1,4 @@
+@php use App\Services\UtilService; @endphp
 @extends('layout.app')
 
 @section('title')
@@ -17,10 +18,20 @@
                                 #{{ $issue->internal_id }} {{ $issue->title }}
                             </a>
                         </div>
-                        <div class="text-sm text-gray-400">{{ $issue->state }}</div>
-                        <div class="inline-flex">
-                            <div class="mr-2 rounded-md bg-gray-200 border-b border-b-gray-300 px-1 py-1">A</div>
-                            <div>B</div>
+                        <div class="text-sm text-gray-400 flex">
+                            <div class="mr-4">{{ $issue->state }}</div>
+                            <div>Author <span class="text-gray-900">{{ $issue->author->name }}</span></div>
+                        </div>
+                        <div class="inline-flex mt-2 opacity-90 text-white">
+                            @if(count($issue->labels) > 0)
+                                @foreach($issue->labels as $label)
+                                    <div
+                                        style="background-color: {{ Arr::get($label, 'color', '') }}"
+                                        class="mr-2 py-1 px-2 rounded-md text-xs
+                                        {{ UtilService::isTextDark(Arr::get($label, 'color', '#eeeeee')) ? 'text-white' : 'text-black' }}">
+                                        {{ Arr::get($label, 'title', '') }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="text-sm text-gray-400">
