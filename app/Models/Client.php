@@ -15,6 +15,10 @@ class Client extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class);

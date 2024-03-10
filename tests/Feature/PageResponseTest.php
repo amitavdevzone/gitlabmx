@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\User;
@@ -60,4 +61,15 @@ it('shows the issue detail view', function () {
     // Act & Assert
     get(route('issues.show', ['project' => $project, 'issue' => $issue]))
         ->assertOk();
+});
+
+it('shows the client list page', function () {
+    // Arrange
+    $client = Client::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('clients.index'))->assertOk();
 });
