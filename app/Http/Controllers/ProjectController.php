@@ -11,6 +11,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::query()
+            ->with('client')
             ->latest('updated_at')
             ->paginate(10);
 

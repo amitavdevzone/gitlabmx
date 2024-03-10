@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,6 +12,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id')->index();
+            $table->foreignIdFor(Client::class)->index()->nullable();
 
             $table->string('name');
             $table->string('name_with_namespace');

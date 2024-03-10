@@ -18,6 +18,7 @@
             <tr>
                 <th></th>
                 <th>Name</th>
+                <th>Client</th>
                 <th>Recent activity</th>
             </tr>
             </thead>
@@ -45,6 +46,7 @@
                         <br/>
                         <span class="badge badge-ghost badge-sm">{{ $project->name_with_namespace }}</span>
                     </td>
+                    <td>{{ $project->client->name ?? '' }}</td>
                     <td>{{ ucfirst($project->updated_at->diffForHumans()) }}</td>
                     <th>
                         <a href="#" class="btn btn-ghost btn-xs">details</a>

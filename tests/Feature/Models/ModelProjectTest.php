@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use App\Models\Issue;
 use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,4 +15,13 @@ test('project has issues', function () {
 
     // Act & Assert
     expect($project->issues)->each->toBeInstanceOf(Issue::class);
+});
+
+it('project belongs to a client', function () {
+    // Arrange
+    $client = Client::factory()->create();
+    $project = Project::factory()->create(['client_id' => $client->id]);
+
+    // Act & Assert
+    expect($project->client)->toBeInstanceOf(Client::class);
 });

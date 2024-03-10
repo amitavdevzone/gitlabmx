@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -52,4 +53,16 @@ it('shows n projects only', function () {
         ->assertDontSeeText([
             $projectNext->name,
         ]);
+});
+
+it('shows the name of the client when a project is mapped', function () {
+    // Arrange
+    $client = Client::factory()->create();
+    Project::factory()->create(['client_id' => $client->id]);
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('projects.index'))->assertSeeText($client->name);
 });
