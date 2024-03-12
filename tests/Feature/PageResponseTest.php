@@ -12,7 +12,7 @@ uses(RefreshDatabase::class);
 
 it('shows the home page', function () {
     get(route('home'))
-        ->assertOk();
+        ->assertRedirect();
 });
 
 it('shows the project listing page', function () {

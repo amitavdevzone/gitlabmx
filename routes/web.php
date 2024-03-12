@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -8,9 +9,7 @@ use App\Http\Controllers\PageDashboardController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('layout.app');
-})->name('home');
+Route::get('/', HomeController::class)->name('home');
 Route::view('/login', 'pages.login')->name('login');
 Route::post('/login', LoginController::class)->name('login.handle');
 
