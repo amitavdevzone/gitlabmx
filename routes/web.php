@@ -16,7 +16,7 @@ Route::post('/login', LoginController::class)->name('login.handle');
 Route::group(['middleware' => ['auth:web']], function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', PageDashboardController::class)->name('dashboard');
-    Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show']);
+    Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show', 'store']);
     Route::resource('/projects', ProjectController::class);
     Route::resource('/projects/{project:project_id}/issues', IssueController::class);
 });

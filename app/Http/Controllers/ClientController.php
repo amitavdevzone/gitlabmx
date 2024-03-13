@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -20,10 +21,17 @@ class ClientController extends Controller
 
     public function create()
     {
+        return view('pages.client.create');
     }
 
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
+        $data = array_merge(['is_active' => true], $request->validated());
+
+        Client::create($data);
+
+        return redirect()->route('clients.index')
+            ->with('success', 'Client created');
     }
 
     public function show($id)
