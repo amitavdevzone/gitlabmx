@@ -2,6 +2,7 @@
 
 namespace App\Actions\Gitlab;
 
+use App\Events\IssueUpdatedEvent;
 use App\Services\GitlabService;
 
 class IssueWebhookHandler
@@ -12,5 +13,6 @@ class IssueWebhookHandler
 
         $gitlabService = app()->make(GitlabService::class);
         $gitlabService->createOrUpdateIssue($issue);
+        IssueUpdatedEvent::broadcast();
     }
 }
