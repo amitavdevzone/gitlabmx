@@ -29,4 +29,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Project::class, 'noteable_id', 'project_id');
     }
+
+    public function issue(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class, 'noteable_id', 'gitlab_id');
+    }
 }
