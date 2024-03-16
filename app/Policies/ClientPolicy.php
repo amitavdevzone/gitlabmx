@@ -13,36 +13,36 @@ class ClientPolicy
 
     public function viewAny(User $user): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function view(User $user, Client $client): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function create(User $user): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function update(User $user, Client $client): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function delete(User $user, Client $client): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function restore(User $user, Client $client): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 
     public function forceDelete(User $user, Client $client): bool
     {
-        return ! Auth::guest();
+        return Auth::check();
     }
 }

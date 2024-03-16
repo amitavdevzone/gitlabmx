@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Gitlab\CommentWebhookHandler;
 use App\Actions\Gitlab\IssueWebhookHandler;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -10,6 +11,7 @@ class GitlabWebhookController extends Controller
 {
     private array $supportedEvents = [
         'issue' => IssueWebhookHandler::class,
+        'note' => CommentWebhookHandler::class,
     ];
 
     public function __invoke(Request $request): Response

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Integrations\Gitlab\GitlabConnector;
 use App\Http\Integrations\Gitlab\Requests\GitlabFetchProjectRequest;
+use App\Models\Comment;
 use App\Models\Issue;
 use App\Models\Project;
 use Carbon\Carbon;
@@ -92,5 +93,21 @@ class GitlabService
         Project::query()
             ->where('project_id', $gitlabIssueData['project_id'])
             ->update(['updated_at' => Carbon::parse($gitlabIssueData['updated_at'])]);
+    }
+
+    public function createOrUpdateComment(array $gitlabCommentData): void
+    {
+        Comment::updateOrCreate(
+            ['gitlab_id' => $gitlabCommentData['id']],
+            [
+                'gitlab_id' => $gitlabCommentData['id'],
+                'author_id' => $gitlabCommentData['author_id'],
+                'noteable_id' => $gitlabCommentData['noteable_id'],
+                'project_id' => $gitlabCommentData['project_id'],
+                'system' => $gitlabCommentData['system'],
+                'noteable_type' => $gitlabCommentData['noteable_type'],
+                'body' => $gitlabCommentData['note'],
+            ]
+        );
     }
 }

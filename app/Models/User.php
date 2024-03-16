@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Issue::class, 'assigned_to', 'gitlab_id');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(User::class, 'gitlab_id');
+    }
 }

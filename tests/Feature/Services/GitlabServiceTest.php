@@ -152,3 +152,37 @@ it('adds author details', function () {
         'project_id' => $sampleData['project_id'],
     ]);
 });
+
+it('creates a comment when not present', function () {
+    // Arrange
+    $sampleData = json_decode(
+        file_get_contents(__DIR__.'/../../Fixtures/webhook-gitlabcomment.json'), true
+    )['object_attributes'];
+
+    // Act
+    app(GitlabService::class)->createOrUpdateComment($sampleData);
+
+    // Assert
+    $this->assertDatabaseHas('comments', [
+        'gitlab_id' => $sampleData['id'],
+        'project_id' => $sampleData['project_id'],
+    ]);
+});
+
+it('updates a comment when it is present', function () {
+    // Arrange
+    $sampleData = json_decode(
+        file_get_contents(__DIR__.'/../../Fixtures/webhook-gitlabcomment.json'), true
+    )['object_attributes'];
+
+    $sampleData['note'] = 'Some random comment';
+
+    // Act
+    app(GitlabService::class)->createOrUpdateComment($sampleData);
+
+    // Assert
+    $this->assertDatabaseHas('comments', [
+        'gitlab_id' => $sampleData['id'],
+        'body' => 'Some random comment',
+    ]);
+});

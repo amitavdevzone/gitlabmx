@@ -10,38 +10,38 @@ class ProjectPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function view(User $user, Project $project)
+    public function view(User $user, Project $project): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function update(User $user, Project $project)
+    public function update(User $user, Project $project): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function delete(User $user, Project $project)
+    public function delete(User $user, Project $project): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function restore(User $user, Project $project)
+    public function restore(User $user, Project $project): bool
     {
-        return true;
+        return Auth::check();
     }
 
-    public function forceDelete(User $user, Project $project)
+    public function forceDelete(User $user, Project $project): bool
     {
-        return true;
+        return Auth::check();
     }
 }

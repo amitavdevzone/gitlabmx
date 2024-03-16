@@ -17,7 +17,7 @@ test('project has issues', function () {
     expect($project->issues)->each->toBeInstanceOf(Issue::class);
 });
 
-it('project belongs to a client', function () {
+test('project belongs to a client', function () {
     // Arrange
     $client = Client::factory()->create();
     $project = Project::factory()->create(['client_id' => $client->id]);
