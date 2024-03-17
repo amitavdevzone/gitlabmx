@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('time');
             $table->boolean('is_backdate')->default(false);
 
-            $table->timestamp('started_at');
+            $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
         });
     }

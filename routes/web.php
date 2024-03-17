@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PageDashboardController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TimeEntryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -19,4 +20,5 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show', 'store']);
     Route::resource('/projects', ProjectController::class);
     Route::resource('/projects/{project:project_id}/issues', IssueController::class);
+    Route::resource('/time-entry', TimeEntryController::class)->only(['store']);
 });
