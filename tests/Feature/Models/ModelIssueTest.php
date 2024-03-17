@@ -3,6 +3,7 @@
 use App\Models\Comment;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\TimeEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -51,4 +52,12 @@ it('has many comments', function () {
 
     // Act & Assert
     expect($issue->comments)->each->toBeInstanceOf(Comment::class);
+});
+
+it('has many time entries', function () {
+    // Arrange
+    $issue = Issue::factory()->has(TimeEntry::factory(3), 'time_entries')->create();
+
+    // Act & Assert
+    expect($issue->time_entries)->each->toBeInstanceOf(TimeEntry::class);
 });

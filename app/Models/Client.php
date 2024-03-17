@@ -23,4 +23,9 @@ class Client extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function time_entries(): HasMany
+    {
+        return $this->hasMany(TimeEntry::class);
+    }
 }

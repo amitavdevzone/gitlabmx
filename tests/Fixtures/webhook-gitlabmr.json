@@ -1,0 +1,215 @@
+{
+    "object_kind": "merge_request",
+    "event_type": "merge_request",
+    "user": {
+        "id": 917644,
+        "name": "Amitav Roy",
+        "username": "amitavroy7",
+        "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/917644/avatar.png",
+        "email": "[REDACTED]"
+    },
+    "project": {
+        "id": 55919300,
+        "name": "gitlabmx",
+        "description": null,
+        "web_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+        "avatar_url": null,
+        "git_ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+        "git_http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git",
+        "namespace": "amitavroy-gitlabmx",
+        "visibility_level": 20,
+        "path_with_namespace": "amitavroy-gitlabmx/gitlabmx",
+        "default_branch": "main",
+        "ci_config_path": "",
+        "homepage": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+        "url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+        "ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+        "http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git"
+    },
+    "object_attributes": {
+        "assignee_id": 917644,
+        "author_id": 917644,
+        "created_at": "2024-03-17 08:16:18 UTC",
+        "description": "Closes #1",
+        "draft": true,
+        "head_pipeline_id": null,
+        "id": 289054898,
+        "iid": 1,
+        "last_edited_at": null,
+        "last_edited_by_id": null,
+        "merge_commit_sha": null,
+        "merge_error": null,
+        "merge_params": {
+            "force_remove_source_branch": "1"
+        },
+        "merge_status": "checking",
+        "merge_user_id": null,
+        "merge_when_pipeline_succeeds": false,
+        "milestone_id": null,
+        "source_branch": "1-issues-should-have-time-spend",
+        "source_project_id": 55919300,
+        "state_id": 1,
+        "target_branch": "main",
+        "target_project_id": 55919300,
+        "time_estimate": 0,
+        "title": "Draft: Resolve \"Issues should have time spend\"",
+        "updated_at": "2024-03-17 08:16:19 UTC",
+        "updated_by_id": null,
+        "prepared_at": "2024-03-17 08:16:19 UTC",
+        "url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx/-/merge_requests/1",
+        "source": {
+            "id": 55919300,
+            "name": "gitlabmx",
+            "description": null,
+            "web_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+            "avatar_url": null,
+            "git_ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "git_http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git",
+            "namespace": "amitavroy-gitlabmx",
+            "visibility_level": 20,
+            "path_with_namespace": "amitavroy-gitlabmx/gitlabmx",
+            "default_branch": "main",
+            "ci_config_path": "",
+            "homepage": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+            "url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git"
+        },
+        "target": {
+            "id": 55919300,
+            "name": "gitlabmx",
+            "description": null,
+            "web_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+            "avatar_url": null,
+            "git_ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "git_http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git",
+            "namespace": "amitavroy-gitlabmx",
+            "visibility_level": 20,
+            "path_with_namespace": "amitavroy-gitlabmx/gitlabmx",
+            "default_branch": "main",
+            "ci_config_path": "",
+            "homepage": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx",
+            "url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "ssh_url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+            "http_url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx.git"
+        },
+        "last_commit": {
+            "id": "693ac69ecaec61f74300107833c4cfa0b2672d99",
+            "message": "Init\n",
+            "title": "Init",
+            "timestamp": "2024-03-17T13:34:37+05:30",
+            "url": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx/-/commit/693ac69ecaec61f74300107833c4cfa0b2672d99",
+            "author": {
+                "name": "Amitav Roy",
+                "email": "reachme@amitavroy.com"
+            }
+        },
+        "work_in_progress": true,
+        "total_time_spent": 0,
+        "time_change": 0,
+        "human_total_time_spent": null,
+        "human_time_change": null,
+        "human_time_estimate": null,
+        "assignee_ids": [
+            917644
+        ],
+        "reviewer_ids": [
+            917644
+        ],
+        "labels": [
+            {
+                "id": 34948488,
+                "title": "S: Backlog",
+                "color": "#009966",
+                "project_id": 55919300,
+                "created_at": "2024-03-17 08:08:57 UTC",
+                "updated_at": "2024-03-17 08:08:57 UTC",
+                "template": false,
+                "description": null,
+                "type": "ProjectLabel",
+                "group_id": null,
+                "lock_on_merge": false
+            },
+            {
+                "id": 34948489,
+                "title": "T: Feature",
+                "color": "#6699cc",
+                "project_id": 55919300,
+                "created_at": "2024-03-17 08:09:11 UTC",
+                "updated_at": "2024-03-17 08:09:11 UTC",
+                "template": false,
+                "description": null,
+                "type": "ProjectLabel",
+                "group_id": null,
+                "lock_on_merge": false
+            }
+        ],
+        "state": "opened",
+        "blocking_discussions_resolved": true,
+        "first_contribution": true,
+        "detailed_merge_status": "checking",
+        "action": "open"
+    },
+    "labels": [
+        {
+            "id": 34948488,
+            "title": "S: Backlog",
+            "color": "#009966",
+            "project_id": 55919300,
+            "created_at": "2024-03-17 08:08:57 UTC",
+            "updated_at": "2024-03-17 08:08:57 UTC",
+            "template": false,
+            "description": null,
+            "type": "ProjectLabel",
+            "group_id": null,
+            "lock_on_merge": false
+        },
+        {
+            "id": 34948489,
+            "title": "T: Feature",
+            "color": "#6699cc",
+            "project_id": 55919300,
+            "created_at": "2024-03-17 08:09:11 UTC",
+            "updated_at": "2024-03-17 08:09:11 UTC",
+            "template": false,
+            "description": null,
+            "type": "ProjectLabel",
+            "group_id": null,
+            "lock_on_merge": false
+        }
+    ],
+    "changes": {
+        "updated_at": {
+            "previous": "2024-03-17 08:16:18 UTC",
+            "current": "2024-03-17 08:16:19 UTC"
+        },
+        "prepared_at": {
+            "previous": null,
+            "current": "2024-03-17 08:16:19 UTC"
+        }
+    },
+    "repository": {
+        "name": "gitlabmx",
+        "url": "git@gitlab.com:amitavroy-gitlabmx/gitlabmx.git",
+        "description": null,
+        "homepage": "https://gitlab.com/amitavroy-gitlabmx/gitlabmx"
+    },
+    "assignees": [
+        {
+            "id": 917644,
+            "name": "Amitav Roy",
+            "username": "amitavroy7",
+            "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/917644/avatar.png",
+            "email": "[REDACTED]"
+        }
+    ],
+    "reviewers": [
+        {
+            "id": 917644,
+            "name": "Amitav Roy",
+            "username": "amitavroy7",
+            "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/917644/avatar.png",
+            "email": "[REDACTED]"
+        }
+    ]
+}

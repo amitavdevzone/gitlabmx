@@ -2,6 +2,7 @@
 
 use App\Models\Client;
 use App\Models\Project;
+use App\Models\TimeEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -13,4 +14,12 @@ it('has a project', function () {
 
     // Act & Assert
     expect($client->projects)->each->toBeInstanceOf(Project::class);
+});
+
+test('client has many time entries', function () {
+    $client = Client::factory()
+        ->has(TimeEntry::factory()->count(3), 'time_entries')
+        ->create();
+
+    expect($client->time_entries)->each->toBeInstanceOf(TimeEntry::class);
 });

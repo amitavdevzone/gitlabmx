@@ -49,4 +49,9 @@ class Issue extends Model
             ->where('noteable_type', 'Issue')
             ->orderByDesc('updated_at');
     }
+
+    public function time_entries(): HasMany
+    {
+        return $this->hasMany(TimeEntry::class);
+    }
 }

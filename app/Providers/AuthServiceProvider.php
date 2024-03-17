@@ -7,10 +7,12 @@ use App\Models\Client;
 use App\Models\Comment;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\TimeEntry;
 use App\Policies\ClientPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\IssuePolicy;
 use App\Policies\ProjectPolicy;
+use App\Policies\TimeEntryPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Issue::class => IssuePolicy::class,
         Client::class => ClientPolicy::class,
         Comment::class => CommentPolicy::class,
+        TimeEntry::class => TimeEntryPolicy::class,
     ];
 
     /**

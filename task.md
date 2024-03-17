@@ -1,0 +1,11 @@
+TimeEntry
+- id
+- user_id
+- client_id
+- project_id
+- issue_id
+- description
+- time
+- is_backdate
+- started_at
+- ended_at

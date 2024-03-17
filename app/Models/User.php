@@ -53,4 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(User::class, 'gitlab_id');
     }
+
+    public function time_entries(): HasMany
+    {
+        return $this->hasMany(TimeEntry::class)
+            ->orderByDesc('ended_at');
+    }
 }
