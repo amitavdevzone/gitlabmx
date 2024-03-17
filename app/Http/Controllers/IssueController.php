@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\IssueStateEnum;
-use App\Events\IssueUpdatedEvent;
 use App\Models\Issue;
 use App\Models\Project;
 
@@ -24,9 +23,10 @@ class IssueController extends Controller
 
     public function show(Project $project, Issue $issue)
     {
-        IssueUpdatedEvent::broadcast();
+        $issue->load(['comments', 'comments.author']);
 
         return view('pages.issue.view')
+            ->with('comments', $issue->comments)
             ->with('project', $project)
             ->with('issue', $issue);
     }

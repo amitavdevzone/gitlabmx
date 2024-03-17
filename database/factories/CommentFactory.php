@@ -13,15 +13,25 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
+            'body' => $this->faker->paragraph(),
+            'gitlab_id' => $this->faker->randomNumber(),
+            'author_id' => $this->faker->randomNumber(),
+            'system' => $this->faker->boolean(),
+            'noteable_id' => $this->faker->randomNumber(),
+            'noteable_type' => $this->faker->word(),
+            'project_id' => $this->faker->randomNumber(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'gitlab_id' => $this->faker->randomNumber(),
-            'author_id' => $this->faker->word(),
-            'noteable_id' => $this->faker->word(),
-            'project_id' => $this->faker->word(),
-            'system' => $this->faker->boolean(),
-            'noteable_type' => $this->faker->word(),
-            'body' => $this->faker->word(),
         ];
+    }
+
+    /**
+     * Indicate that the comment is for an issue
+     */
+    public function forIssue(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'noteable_type' => 'Issue',
+        ]);
     }
 }

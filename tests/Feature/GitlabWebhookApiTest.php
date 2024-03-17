@@ -14,7 +14,7 @@ $dataSet = [
 it('gives a 200 status when data is proper', function (string $fileName) {
     // Arrange
     $sampleData = json_decode(
-        file_get_contents(__DIR__. "/../Fixtures/{$fileName}"), true
+        file_get_contents(__DIR__."/../Fixtures/{$fileName}"), true
     );
 
     // Act & Assert
@@ -26,7 +26,7 @@ it('gives a 200 status when data is proper', function (string $fileName) {
 it('gives a 401 error when the header is missing', function (string $fileName) {
     // Arrange
     $sampleData = json_decode(
-        file_get_contents(__DIR__. "/../Fixtures/{$fileName}"), true
+        file_get_contents(__DIR__."/../Fixtures/{$fileName}"), true
     );
 
     // Act & Assert
@@ -37,7 +37,7 @@ it('gives a 401 error when the header is missing', function (string $fileName) {
 it('gives a 401 when the token is wrong', function (string $fileName) {
     // Arrange
     $sampleData = json_decode(
-        file_get_contents(__DIR__. "/../Fixtures/{$fileName}"), true
+        file_get_contents(__DIR__."/../Fixtures/{$fileName}"), true
     );
 
     // Act & Assert
@@ -49,7 +49,7 @@ it('gives a 401 when the token is wrong', function (string $fileName) {
 it('gives a 400 error when event type is not supported', function (string $fileName) {
     // Arrange
     $sampleData = json_decode(
-        file_get_contents(__DIR__. "/../Fixtures/{$fileName}"), true
+        file_get_contents(__DIR__."/../Fixtures/{$fileName}"), true
     );
     $sampleData['event_type'] = 'random';
 
