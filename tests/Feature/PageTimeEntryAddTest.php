@@ -12,18 +12,17 @@ uses(RefreshDatabase::class);
 
 it('adds a time entry when data is proper', function () {
     // Arrange
+    $project = Project::factory()->create(['client_id' => 1]);
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
     $data = [
-        'user_id' => User::factory()->create()->id,
-        'client_id' => Client::factory()->create()->id,
-        'project_id' => Project::factory()->create()->id,
-        'issue_id' => Issue::factory()->create()->id,
+        'issue_id' => $issue->id,
         'description' => 'My time entry',
         'time' => 60,
     ];
 
     // Act
     $this->actingAs(User::factory()->create());
-    post(route('time-entry.store'), $data);
+    post(route('time-entries.store'), $data);
 
     // Assert
     $this->assertDatabaseCount('time_entries', 1);
@@ -35,61 +34,79 @@ it('requires all necessary fields', function () {
     $this->actingAs(User::factory()->create());
 
     // Assert
-    post(route('time-entry.store'), [])
-        ->assertSessionHasErrors(['user_id', 'client_id', 'project_id', 'description', 'time'])
+    post(route('time-entries.store'), [])
+        ->assertSessionHasErrors(['description', 'time'])
         ->assertSessionDoesntHaveErrors(['issue_id']);
 });
 
-it('requires a user to be present', function () {
+it('adds the current logged in user', function () {
     // Arrange
+    $user = User::factory()->create();
+    $issue = Issue::factory()->create([
+        'project_id' => Project::factory()->create(['client_id' => 1])->project_id,
+    ]);
+
     $data = [
-        'user_id' => 9999,
-        'client_id' => Client::factory()->create()->id,
-        'project_id' => Project::factory()->create()->id,
-        'issue_id' => Issue::factory()->create()->id,
+        'issue_id' => $issue->id,
         'description' => 'My time entry',
         'time' => 60,
     ];
 
     // Act
-    $this->actingAs(User::factory()->create());
+    $this->actingAs($user);
 
     // Assert
-    post(route('time-entry.store'), $data)->assertSessionHasErrors(['user_id']);
+    post(route('time-entries.store'), $data);
+
+    $this->assertDatabaseHas('time_entries', [
+        'user_id' => $user->id,
+    ]);
 });
 
-it('requires a client to be present', function () {
+it('assigns the client based on the project', function () {
     // Arrange
+    $user = User::factory()->create();
+    $client = Client::factory()->create();
+    $project = Project::factory()->create(['client_id' => $client->id]);
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
     $data = [
-        'user_id' => User::factory()->create()->id,
-        'client_id' => 111,
-        'project_id' => Project::factory()->create()->id,
-        'issue_id' => Issue::factory()->create()->id,
+        'issue_id' => $issue->id,
         'description' => 'My time entry',
         'time' => 60,
     ];
 
     // Act
-    $this->actingAs(User::factory()->create());
+    $this->actingAs($user);
 
     // Assert
-    post(route('time-entry.store'), $data)->assertSessionHasErrors(['client_id']);
+    post(route('time-entries.store'), $data);
+
+    $this->assertDatabaseHas('time_entries', [
+        'client_id' => $client->id,
+    ]);
 });
 
 it('requires a project to be present', function () {
     // Arrange
+    $user = User::factory()->create();
+    $client = Client::factory()->create();
+    $project = Project::factory()->create(['client_id' => $client->id]);
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
     $data = [
-        'user_id' => User::factory()->create()->id,
-        'client_id' => Client::factory()->create()->id,
-        'project_id' => 111,
-        'issue_id' => Issue::factory()->create()->id,
+        'issue_id' => $issue->id,
         'description' => 'My time entry',
         'time' => 60,
     ];
 
     // Act
-    $this->actingAs(User::factory()->create());
+    $this->actingAs($user);
 
     // Assert
-    post(route('time-entry.store'), $data)->assertSessionHasErrors(['project_id']);
+    post(route('time-entries.store'), $data);
+
+    $this->assertDatabaseHas('time_entries', [
+        'project_id' => $project->id,
+    ]);
 });

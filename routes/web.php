@@ -20,5 +20,5 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show', 'store']);
     Route::resource('/projects', ProjectController::class);
     Route::resource('/projects/{project:project_id}/issues', IssueController::class);
-    Route::resource('/time-entry', TimeEntryController::class)->only(['store']);
+    Route::resource('/time-entries', TimeEntryController::class)->only(['store', 'create']);
 });

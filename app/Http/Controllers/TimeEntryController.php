@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\TimeEntry\EntryAddedEvent;
+use App\Models\Issue;
+use App\Models\Project;
 use App\Services\TimeEntryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,20 +16,32 @@ class TimeEntryController extends Controller
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        if (! $request->has('issue_id')) {
+            abort(400, 'Issue not specified.');
+        }
+
+        $issue = Issue::findOrFail($request->input('issue_id'));
+
+        return view('pages.time-entries.create')
+            ->with('issue', $issue);
     }
 
     public function store(Request $request, TimeEntryService $service)
     {
         $data = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'client_id' => 'required|exists:clients,id',
-            'project_id' => 'required|exists:projects,id',
             'issue_id' => 'sometimes|exists:issues,id',
             'description' => 'required|min:3',
             'time' => 'required|numeric',
         ]);
+
+        $issue = Issue::find($data['issue_id']);
+        $project = Project::where('project_id', $issue->project_id)->first();
+
+        $data['user_id'] = Auth::user()->id;
+        $data['client_id'] = $project->client_id;
+        $data['project_id'] = $project->id;
 
         $entry = $service->addTimeEntry($data);
 
