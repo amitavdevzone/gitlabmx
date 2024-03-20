@@ -42,6 +42,8 @@ class TimeEntryController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['client_id'] = $project->client_id;
         $data['project_id'] = $project->id;
+        $data['started_at'] = now()->subMinutes($data['time']);
+        $data['ended_at'] = now();
 
         $entry = $service->addTimeEntry($data);
 

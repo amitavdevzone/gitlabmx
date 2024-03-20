@@ -9,7 +9,7 @@ use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
 
-it('it shows ticket information', function () {
+it('shows ticket information', function () {
     // Arrange
     $user = User::factory()->create();
     $project = Project::factory()->create();
@@ -28,7 +28,7 @@ it('it shows ticket information', function () {
         ]);
 });
 
-it('it shows 404 when the ticket does not exist', function () {
+it('shows 404 when the ticket does not exist', function () {
     // Arrange
     $user = User::factory()->create();
     $project = Project::factory()->create();
@@ -41,7 +41,7 @@ it('it shows 404 when the ticket does not exist', function () {
         ->assertNotFound();
 });
 
-it('it shows the correct state of the ticket', function () {
+it('shows the correct state of the ticket', function () {
     // Arrange
     $user = User::factory()->create();
     $project = Project::factory()->create();
@@ -56,5 +56,20 @@ it('it shows the correct state of the ticket', function () {
             $issue->state,
             $issue->title,
         ])
+        ->assertOk();
+});
+
+it('shows the time entry link', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.show', ['project' => $project, 'issue' => $issue]))
+        ->assertSee(route('time-entries.create', ['issue_id' => $issue->id]))
         ->assertOk();
 });

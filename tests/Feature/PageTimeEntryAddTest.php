@@ -110,3 +110,27 @@ it('requires a project to be present', function () {
         'project_id' => $project->id,
     ]);
 });
+
+it('takes current time for start and end when only time is sent', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $client = Client::factory()->create();
+    $project = Project::factory()->create(['client_id' => $client->id]);
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+
+    $data = [
+        'issue_id' => $issue->id,
+        'description' => 'My time entry',
+        'time' => 60,
+    ];
+
+    // Act
+    $this->actingAs($user);
+    post(route('time-entries.store'), $data);
+
+    // Assert
+    $this->assertDatabaseHas('time_entries', [
+        'started_at' => now()->subMinutes($data['time']),
+        'ended_at' => now(),
+    ]);
+});
