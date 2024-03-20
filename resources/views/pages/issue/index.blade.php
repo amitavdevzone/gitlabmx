@@ -13,10 +13,15 @@
             <li class="block py-3 border-b border-gray-200 last:border-b-0">
                 <div class="flex justify-between">
                     <div>
-                        <div class="font-bold">
-                            <a class="underline" href="{{ route('issues.show', ['project' => $issue->project_id, 'issue' => $issue->gitlab_id]) }}">
-                                #{{ $issue->internal_id }} {{ $issue->title }}
-                            </a>
+                        <div class="font-bold flex items-center py-2">
+                            <div class="underline">
+                                <a href="{{ route('issues.show', ['project' => $issue->project_id, 'issue' => $issue->gitlab_id]) }}">
+                                    #{{ $issue->internal_id }} {{ $issue->title }}
+                                </a>
+                            </div>
+                            <div class="material-symbols-outlined ml-2">
+                                <a href="{{ route('time-entries.create', ['issue_id' => $issue->id]) }}" target="_blank">play_circle</a>
+                            </div>
                         </div>
                         <div class="text-sm text-gray-400 flex">
                             <div class="mr-4">{{ $issue->state }}</div>

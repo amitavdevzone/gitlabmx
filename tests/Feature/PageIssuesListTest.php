@@ -156,3 +156,18 @@ it('shows the issue author name', function () {
         ])
         ->assertOk();
 });
+
+it('shows the link to time entry', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $issue = Issue::factory()->create(['author_id' => $user->gitlab_id, 'project_id' => $project->project_id]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project]))
+        ->assertSee(route('time-entries.create', ['issue_id' => $issue->id]))
+        ->assertOk();
+});
