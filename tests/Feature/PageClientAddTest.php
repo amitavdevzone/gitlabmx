@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ClientStatusEnum;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -74,7 +75,7 @@ it('makes new client active', function () {
     post(route('clients.store'), ['name' => 'My first client']);
 
     $this->assertDatabaseCount('clients', 1);
-    $this->assertDatabaseHas('clients', ['name' => 'My first client', 'is_active' => true]);
+    $this->assertDatabaseHas('clients', ['name' => 'My first client', 'is_active' => ClientStatusEnum::ACTIVE]);
 });
 
 it('redirects back after client is saved', function () {

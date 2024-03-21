@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ClientStatusEnum;
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -16,14 +17,14 @@ class ClientFactory extends Factory
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'name' => $this->faker->name(),
-            'is_active' => true,
+            'is_active' => ClientStatusEnum::ACTIVE,
         ];
     }
 
     public function inactive(): static
     {
         return $this->state(fn (array $attributes) => [
-            'is_active' => false,
+            'is_active' => ClientStatusEnum::INACTIVE,
         ]);
     }
 }

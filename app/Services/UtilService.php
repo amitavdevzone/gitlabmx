@@ -34,6 +34,7 @@ class UtilService
     public static function timeInHours(int $mins): float
     {
         $hours = $mins / 60;
+
         return round($hours, 2);
     }
 }
