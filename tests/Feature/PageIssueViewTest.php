@@ -2,6 +2,7 @@
 
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\TimeEntry;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -71,5 +72,21 @@ it('shows the time entry link', function () {
     // Assert
     get(route('issues.show', ['project' => $project, 'issue' => $issue]))
         ->assertSee(route('time-entries.create', ['issue_id' => $issue->id]))
+        ->assertOk();
+});
+
+it('shows the total time spent', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $issue = Issue::factory()->create(['project_id' => $project->project_id]);
+    TimeEntry::factory(2)->create(['issue_id' => $issue->id, 'time' => 60]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.show', ['project' => $project, 'issue' => $issue]))
+        ->assertSee(['Total time spent:', '2 hours'])
         ->assertOk();
 });

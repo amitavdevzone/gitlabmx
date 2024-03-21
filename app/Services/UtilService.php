@@ -30,4 +30,10 @@ class UtilService
         // Choose text color based on contrast ratio threshold (4.5 for normal text)
         return $contrastRatio >= 2;
     }
+
+    public static function timeInHours(int $mins): float
+    {
+        $hours = $mins / 60;
+        return round($hours, 2);
+    }
 }
