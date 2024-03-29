@@ -4,6 +4,9 @@
     <div class="text-lg font-bold">
         Issue
     </div>
+    <div>
+        <livewire:time-tracker />
+    </div>
 @endsection
 
 @section('content')

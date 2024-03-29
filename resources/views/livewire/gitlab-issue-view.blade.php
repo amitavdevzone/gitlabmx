@@ -7,7 +7,7 @@
                     <h2 class="font-bold text-xl">#{{ $issue->internal_id }} {{ $issue->title }}</h2>
                 </div>
                 <div class="material-symbols-outlined ml-2 hover:text-purple-700">
-                    <a href="{{ route('time-entries.create', ['issue_id' => $issue->id]) }}" target="_blank">play_circle</a>
+                    <a href="{{ route('time-entries.create', ['issue_id' => $issue->id]) }}" target="_blank">schedule</a>
                 </div>
             </div>
             <div class="flex items-center">

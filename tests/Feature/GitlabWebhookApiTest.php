@@ -12,6 +12,8 @@ $dataSet = [
 ];
 
 it('gives a 200 status when data is proper', function (string $fileName) {
+    Event::fake();
+
     // Arrange
     $sampleData = json_decode(
         file_get_contents(__DIR__."/../Fixtures/{$fileName}"), true
