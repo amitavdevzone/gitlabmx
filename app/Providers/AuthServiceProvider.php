@@ -5,11 +5,13 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Client;
 use App\Models\Comment;
+use App\Models\Delivery;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\TimeEntry;
 use App\Policies\ClientPolicy;
 use App\Policies\CommentPolicy;
+use App\Policies\DeliveryPolicy;
 use App\Policies\IssuePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\TimeEntryPolicy;
@@ -29,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         Client::class => ClientPolicy::class,
         Comment::class => CommentPolicy::class,
         TimeEntry::class => TimeEntryPolicy::class,
+        Delivery::class => DeliveryPolicy::class,
     ];
 
     /**

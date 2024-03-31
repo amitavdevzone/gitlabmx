@@ -30,4 +30,9 @@ class Project extends Model
     {
         return $this->hasMany(TimeEntry::class);
     }
+
+    public function deliveries(): HasMany
+    {
+        return $this->hasMany(Delivery::class);
+    }
 }

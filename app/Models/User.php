@@ -59,4 +59,9 @@ class User extends Authenticatable
         return $this->hasMany(TimeEntry::class)
             ->orderByDesc('ended_at');
     }
+
+    public function deliveries(): HasMany
+    {
+        return $this->hasMany(Delivery::class, 'owner_id');
+    }
 }
