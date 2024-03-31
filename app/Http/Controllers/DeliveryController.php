@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {
-    public function index()
+    public function index(Project $project)
     {
+        $deliveries = Delivery::query()
+            ->where('project_id', $project->id)
+            ->orderByDesc('updated_at')
+            ->paginate(10);
 
+        return view('pages.deliveries.index')
+            ->with('deliveries', $deliveries)
+            ->with('project', $project);
     }
 
     public function create(Project $project)
