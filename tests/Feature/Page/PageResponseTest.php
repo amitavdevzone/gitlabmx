@@ -84,3 +84,14 @@ it('shows the project edit page', function () {
     // Assert
     get(route('projects.show', ['project' => $project]))->assertOk();
 });
+
+it('shows the delivery create page', function () {
+    // Arrange
+    $project = Project::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('deliveries.create', ['project' => $project]))->assertOk();
+});

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->longText('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('is_complete')->index();
-            $table->unsignedBigInteger('progress_complete');
-            $table->unsignedBigInteger('estimated_hours');
-            $table->unsignedBigInteger('completed_hours');
+            $table->boolean('is_complete')->index()->default(0);
+            $table->unsignedBigInteger('progress_complete')->default(0);
+            $table->unsignedBigInteger('estimated_hours')->default(0);
+            $table->unsignedBigInteger('completed_hours')->default(0);
             $table->timestamps();
         });
     }
