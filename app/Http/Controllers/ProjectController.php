@@ -15,13 +15,13 @@ class ProjectController extends Controller
             ->latest('updated_at')
             ->paginate(10);
 
-        return view('projects.index')
+        return view('pages.projects.index')
             ->with('projects', $projects);
     }
 
     public function create()
     {
-        return view('project.fetch');
+        return view('pages.projects.fetch');
     }
 
     public function store(Request $request)
