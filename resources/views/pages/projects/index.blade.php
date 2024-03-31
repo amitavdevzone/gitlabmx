@@ -49,7 +49,7 @@
                     <td>{{ $project->client->name ?? '' }}</td>
                     <td>{{ ucfirst($project->updated_at->diffForHumans()) }}</td>
                     <th>
-                        <a href="#" class="btn btn-ghost btn-xs">details</a>
+                        <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-ghost btn-xs">details</a>
                     </th>
                 </tr>
             @endforeach

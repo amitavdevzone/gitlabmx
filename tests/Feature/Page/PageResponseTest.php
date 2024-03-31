@@ -73,3 +73,14 @@ it('shows the client list page', function () {
     // Assert
     get(route('clients.index'))->assertOk();
 });
+
+it('shows the project edit page', function () {
+    // Arrange
+    $project = Project::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('projects.show', ['project' => $project]))->assertOk();
+});
