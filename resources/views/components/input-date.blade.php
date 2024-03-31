@@ -3,9 +3,9 @@
     <label for="{{ $name }}">{{ $label }}</label>
     <input
         class="input input-bordered w-full rounded shadow"
-        type="text"
+        type="date"
         name="{{$name}}"
-        value="{{ old($name) ?? $value ?? '' }}"
+        value="{{ old($name) ?: $value ?: now()->format('Y-m-d') }}"
         placeholder="{{ $placeholder }}"
         id="{{ $name }}"
         {{ $disabled ? 'disabled' : '' }}
