@@ -26,7 +26,7 @@ class IssueController extends Controller
         $issue->load(['comments', 'comments.author']);
         $issue->loadSum('time_entries', 'time');
 
-        return view('pages.issue.view')
+        return view('pages.issue.show')
             ->with('comments', $issue->comments)
             ->with('project', $project)
             ->with('issue', $issue);

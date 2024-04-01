@@ -47,7 +47,7 @@ class ProjectController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('pages.projects.view')
+        return view('pages.projects.show')
             ->with('clients', $clients)
             ->with('project', $project);
     }
