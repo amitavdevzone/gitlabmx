@@ -24,6 +24,7 @@
                 <th>Progress</th>
                 <th>Estimated hours</th>
                 <th>Completed hours</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -48,6 +49,15 @@
                     <td>{{ $delivery->progress_complete }}</td>
                     <td>{{ $delivery->estimated_hours }}</td>
                     <td>{{ $delivery->completed_hours }}</td>
+                    <td>
+                        <div class="flex">
+                            <div>
+                                <a href="{{ route('deliveries.edit', ['project' => $project, 'delivery' => $delivery]) }}">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Client;
+use App\Models\Delivery;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\User;
@@ -94,4 +95,16 @@ it('shows the delivery create page', function () {
 
     // Assert
     get(route('deliveries.create', ['project' => $project]))->assertOk();
+});
+
+it('shows the delivery edit page', function () {
+    // Arrange
+    $project = Project::factory()->create();
+    $delivery = Delivery::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('deliveries.edit', ['project' => $project, 'delivery' => $delivery]))->assertOk();
 });

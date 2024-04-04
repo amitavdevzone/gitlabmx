@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeliveryRequest;
 use App\Models\Delivery;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class DeliveryController extends Controller
 {
-    public function index(Project $project)
+    public function index(Project $project): View
     {
         $deliveries = Delivery::query()
             ->where('project_id', $project->id)
@@ -20,20 +22,18 @@ class DeliveryController extends Controller
             ->with('project', $project);
     }
 
-    public function create(Project $project)
+    public function create(Project $project): View
     {
+        $delivery = new Delivery;
+
         return view('pages.deliveries.create')
+            ->with('delivery', $delivery)
             ->with('project', $project);
     }
 
-    public function store(Request $request, Project $project)
+    public function store(DeliveryRequest $request, Project $project): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'description' => 'sometimes|min:3',
-            'start_date' => 'required|date_format:Y-m-d',
-            'end_date' => 'required|date_format:Y-m-d',
-        ]);
+        $data = $request->validated();
 
         Delivery::create([
             'project_id' => $project->id,
@@ -53,12 +53,23 @@ class DeliveryController extends Controller
     {
     }
 
-    public function edit($id)
+    public function edit(Project $project, Delivery $delivery)
     {
+        return view('pages.deliveries.edit')
+            ->with('project', $project)
+            ->with('delivery', $delivery);
     }
 
-    public function update(Request $request, $id)
+    public function update(DeliveryRequest $request, Project $project, Delivery $delivery)
     {
+        $data = $request->validated();
+
+        Delivery::where('id', $delivery->id)
+            ->update($data);
+
+        return redirect()
+            ->route('deliveries.edit', ['project' => $project, 'delivery' => $delivery])
+            ->with('success', 'Delivery edited');
     }
 
     public function destroy($id)

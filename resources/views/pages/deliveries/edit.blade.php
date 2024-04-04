@@ -2,7 +2,7 @@
 
 @section('title')
     <div class="text-lg font-bold">
-        Create Delivery for "{{ $project->name }}"
+        Edit Delivery "{{ $delivery->title }}"
     </div>
 @endsection
 
@@ -15,8 +15,9 @@
             </div>
         @endif
 
-        <form class="py-4 px-12" action="{{ route('deliveries.store', ['project' => $project]) }}" method="post">
+        <form class="py-4 px-12" action="{{ route('deliveries.update', ['project' => $project, 'delivery' => $delivery]) }}" method="post">
             {{ csrf_field() }}
+            @method('PATCH')
 
             @include('pages.deliveries.common.form')
 
