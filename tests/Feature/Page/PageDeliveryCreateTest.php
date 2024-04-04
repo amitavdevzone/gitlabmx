@@ -13,7 +13,6 @@ it('adds a delivery for the project', function () {
     $project = Project::factory()->create();
 
     $data = [
-        'project_id' => $project->id,
         'title' => 'Delivery title',
         'description' => 'Delivery description',
         'start_date' => now()->format('Y-m-d'),
@@ -33,7 +32,6 @@ it('redirects to listing', function () {
     $project = Project::factory()->create();
 
     $data = [
-        'project_id' => $project->id,
         'title' => 'Delivery title',
         'description' => 'Delivery description',
         'start_date' => now()->format('Y-m-d'),
@@ -63,7 +61,6 @@ it('start and end dates needs to be proper format', function () {
     $project = Project::factory()->create();
 
     $data = [
-        'project_id' => $project->id,
         'title' => 'Delivery title',
         'description' => 'Delivery description',
         'start_date' => now()->format('d-m-Y'),
