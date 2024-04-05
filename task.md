@@ -1,11 +1,15 @@
-TimeEntry
-- id
-- user_id
-- client_id
-- project_id
-- issue_id
+# Estimate create feature
+
+## Table columns to fill
+
+- select delivery
+- title
 - description
-- time
-- is_backdate
-- started_at
-- ended_at
+- estimated_hours
+
+## Tasks
+
+- [] Form which will have a select list for Delivery (context to a project)
+- [] Text field for title and description
+- [] Numeric field for the Estimated hours
+- [] Route will be "/projects/{project}/deliveries/{delivery}/estimate/create"
