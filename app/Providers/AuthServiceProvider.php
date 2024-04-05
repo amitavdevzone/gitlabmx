@@ -6,12 +6,14 @@ namespace App\Providers;
 use App\Models\Client;
 use App\Models\Comment;
 use App\Models\Delivery;
+use App\Models\Estimate;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\TimeEntry;
 use App\Policies\ClientPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\DeliveryPolicy;
+use App\Policies\EstimatePolicy;
 use App\Policies\IssuePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\TimeEntryPolicy;
@@ -32,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Comment::class => CommentPolicy::class,
         TimeEntry::class => TimeEntryPolicy::class,
         Delivery::class => DeliveryPolicy::class,
+        Estimate::class => EstimatePolicy::class,
     ];
 
     /**

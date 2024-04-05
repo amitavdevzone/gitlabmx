@@ -35,4 +35,9 @@ class Project extends Model
     {
         return $this->hasMany(Delivery::class);
     }
+
+    public function estimates(): HasMany
+    {
+        return $this->hasMany(Estimate::class);
+    }
 }
