@@ -108,3 +108,15 @@ it('shows the delivery edit page', function () {
     // Assert
     get(route('deliveries.edit', ['project' => $project, 'delivery' => $delivery]))->assertOk();
 });
+
+it('shows the estimate create page', function () {
+    // Arrange
+    $project = Project::factory()->create();
+    $delivery = Delivery::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('estimates.create', ['project' => $project, 'delivery' => $delivery]))->assertOk();
+});

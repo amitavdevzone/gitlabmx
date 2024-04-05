@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\EstimateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\LoginController;
@@ -23,5 +24,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::resource('/projects/{project:project_id}/issues', IssueController::class);
     Route::resource('/projects/{project}/deliveries', DeliveryController::class)
         ->only(['create', 'store', 'index', 'edit', 'update']);
+    Route::resource('/projects/{project}/deliveries/{delivery}/estimates', EstimateController::class)
+        ->only(['create', 'store', 'index']);
     Route::resource('/time-entries', TimeEntryController::class)->only(['store', 'create']);
 });
