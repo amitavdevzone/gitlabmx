@@ -20,11 +20,16 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', PageDashboardController::class)->name('dashboard');
     Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show', 'store']);
+
+    /** Project related routes are grouped here. */
     Route::resource('/projects', ProjectController::class);
-    Route::resource('/projects/{project:project_id}/issues', IssueController::class);
-    Route::resource('/projects/{project}/deliveries', DeliveryController::class)
-        ->only(['create', 'store', 'index', 'edit', 'update']);
-    Route::resource('/projects/{project}/deliveries/{delivery}/estimates', EstimateController::class)
-        ->only(['create', 'store', 'index']);
+    Route::group(['prefix' => 'projects'], function () {
+        Route::resource('/{project:project_id}/issues', IssueController::class);
+        Route::resource('/{project}/deliveries', DeliveryController::class)
+            ->only(['create', 'store', 'index', 'edit', 'update']);
+        Route::resource('/{project}/deliveries/{delivery}/estimates', EstimateController::class)
+            ->only(['create', 'store', 'index']);
+    });
+
     Route::resource('/time-entries', TimeEntryController::class)->only(['store', 'create']);
 });
