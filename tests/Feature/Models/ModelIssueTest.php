@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Comment;
+use App\Models\Estimate;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\TimeEntry;
@@ -60,4 +61,10 @@ it('has many time entries', function () {
 
     // Act & Assert
     expect($issue->time_entries)->each->toBeInstanceOf(TimeEntry::class);
+});
+
+it('belongs to an estimate', function () {
+    $issue = Issue::factory()->for(Estimate::factory())->create();
+
+    expect($issue->estimate)->toBeInstanceOf(Estimate::class);
 });

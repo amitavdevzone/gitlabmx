@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\IssueStateEnum;
+use App\Models\Estimate;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('author_id')->index();
             $table->unsignedBigInteger('assigned_to')->index();
             $table->unsignedBigInteger('closed_by')->nullable();
+            $table->foreignIdFor(Estimate::class)->nullable()->index();
             $table->string('title');
             $table->text('description');
             $table->string('state')->default(IssueStateEnum::OPENED)->index();

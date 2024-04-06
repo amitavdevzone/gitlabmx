@@ -17,8 +17,8 @@ class Issue extends Model
     }
 
     protected $fillable = [
-        'gitlab_id', 'internal_id', 'project_id', 'author_id', 'closed_by', 'title', 'description', 'state', 'closed_at', 'labels',
-        'assignees', 'due_date', 'assigned_to',
+        'gitlab_id', 'internal_id', 'project_id', 'author_id', 'closed_by', 'estimate_id', 'title', 'description',
+        'state', 'closed_at', 'labels', 'assignees', 'due_date', 'assigned_to',
     ];
 
     protected $casts = [
@@ -53,5 +53,10 @@ class Issue extends Model
     public function time_entries(): HasMany
     {
         return $this->hasMany(TimeEntry::class);
+    }
+
+    public function estimate(): BelongsTo
+    {
+        return $this->belongsTo(Estimate::class);
     }
 }

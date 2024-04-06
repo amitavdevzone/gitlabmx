@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\IssueStateEnum;
+use App\Models\Estimate;
 use App\Models\Issue;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -19,6 +20,7 @@ class IssueFactory extends Factory
             'project_id' => $this->faker->randomNumber(),
             'author_id' => $this->faker->randomNumber(),
             'assigned_to' => $this->faker->randomNumber(),
+            'estimate_id' => Estimate::factory(),
             'title' => $this->faker->unique()->word(),
             'description' => $this->faker->text(),
             'state' => IssueStateEnum::OPENED,
