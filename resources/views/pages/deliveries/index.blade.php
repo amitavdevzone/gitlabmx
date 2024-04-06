@@ -51,6 +51,11 @@
                     <td>{{ $delivery->completed_hours }}</td>
                     <td>
                         <div class="flex">
+                            <div class="pr-4">
+                                <a href="{{ route('estimates.index', ['project' => $project, 'delivery' => $delivery]) }}">
+                                    <span class="material-symbols-outlined">av_timer</span>
+                                </a>
+                            </div>
                             <div>
                                 <a href="{{ route('deliveries.edit', ['project' => $project, 'delivery' => $delivery]) }}">
                                     <span class="material-symbols-outlined">edit</span>

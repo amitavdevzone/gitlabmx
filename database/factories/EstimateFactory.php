@@ -21,10 +21,17 @@ class EstimateFactory extends Factory
             'delivery_id' => Delivery::factory(),
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
-            'is_complete' => $this->faker->boolean(),
+            'is_complete' => false,
             'progress_percentage' => rand(0, 100),
             'estimated_hours' => $this->faker->randomNumber(),
             'completed_hours' => $this->faker->randomNumber(),
         ];
+    }
+
+    public function completed(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_complete' => true,
+        ]);
     }
 }

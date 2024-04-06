@@ -12,9 +12,19 @@ use Illuminate\View\View;
 
 class EstimateController extends Controller
 {
-    public function index()
+    public function index(Project $project, Delivery $delivery)
     {
+        $estimates = Estimate::query()
+            ->where('is_complete', 0)
+            ->where('project_id', $project->id)
+            ->where('delivery_id', $delivery->id)
+            ->orderByDesc('id')
+            ->paginate(10);
 
+        return view('estimates.index')
+            ->with('estimates', $estimates)
+            ->with('delivery', $delivery)
+            ->with('project', $project);
     }
 
     public function create(Project $project, Delivery $delivery): View

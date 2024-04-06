@@ -120,3 +120,15 @@ it('shows the estimate create page', function () {
     // Assert
     get(route('estimates.create', ['project' => $project, 'delivery' => $delivery]))->assertOk();
 });
+
+it('shows the estimate list page', function () {
+    // Arrange
+    $project = Project::factory()->create();
+    $delivery = Delivery::factory()->create();
+
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('estimates.index', ['project' => $project, 'delivery' => $delivery]))->assertOk();
+});
