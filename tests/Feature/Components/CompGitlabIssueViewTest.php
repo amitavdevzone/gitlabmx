@@ -19,7 +19,7 @@ it('renders on the issue page', function () {
     $this->actingAs(User::factory()->create());
 
     // Assert
-    get(route('issues.show', ['project' => $issue->project->project_id, 'issue' => $issue->gitlab_id]))
+    get(route('issues.show', ['project' => $issue->project->id, 'issue' => $issue->gitlab_id]))
         ->assertSeeLivewire(GitlabIssueView::class)
         ->assertSee($issue->title)
         ->assertOk();

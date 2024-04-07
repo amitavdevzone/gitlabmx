@@ -15,7 +15,7 @@
                     <div>
                         <div class="font-bold flex items-center py-2">
                             <div class="underline">
-                                <a href="{{ route('issues.show', ['project' => $issue->project_id, 'issue' => $issue->gitlab_id]) }}">
+                                <a href="{{ route('issues.show', ['project' => $project->id, 'issue' => $issue->gitlab_id]) }}">
                                     #{{ $issue->internal_id }} {{ $issue->title }}
                                 </a>
                             </div>

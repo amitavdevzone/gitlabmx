@@ -18,6 +18,7 @@ class IssueController extends Controller
             ->paginate(10);
 
         return view('pages.issue.index')
+            ->with('project', $project)
             ->with('issues', $issues);
     }
 

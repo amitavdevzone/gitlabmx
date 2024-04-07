@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     /** Project related routes are grouped here. */
     Route::resource('/projects', ProjectController::class);
     Route::group(['prefix' => 'projects'], function () {
-        Route::resource('/{project:project_id}/issues', IssueController::class);
+        Route::resource('/{project}/issues', IssueController::class);
         Route::resource('/{project}/deliveries', DeliveryController::class)
             ->only(['create', 'store', 'index', 'edit', 'update']);
         Route::resource('/{project}/deliveries/{delivery}/estimates', EstimateController::class)

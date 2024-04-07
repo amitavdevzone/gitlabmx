@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="text-xs">{{ $project->project_id }}</div>
+                                <div class="text-xs">{{ $project->id }}</div>
                                 <div class="text-xs opacity-50">{{ $project->visibility }}</div>
                             </div>
                         </div>

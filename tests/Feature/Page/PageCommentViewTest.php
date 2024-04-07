@@ -12,7 +12,7 @@ uses(RefreshDatabase::class);
 
 it('shows comments for an issue', function () {
     // Arrange
-    $issue = Issue::factory()->create(['project_id' => Project::factory()->create()->project_id]);
+    $issue = Issue::factory()->create(['project_id' => Project::factory()->create()->id]);
     $comment = Comment::factory()->forIssue()->create(['noteable_id' => $issue->gitlab_id]);
 
     // Act
@@ -31,7 +31,7 @@ it('shows comments for an issue', function () {
 it('shows recent comment on top', function () {
     // Arrange
     $user = User::factory()->create();
-    $issue = Issue::factory()->create(['project_id' => Project::factory()->create()->project_id]);
+    $issue = Issue::factory()->create(['project_id' => Project::factory()->create()->id]);
     $comment = Comment::factory()->forIssue()->create(['noteable_id' => $issue->gitlab_id]);
     $commentOld = Comment::factory()
         ->forIssue()->create(['noteable_id' => $issue->gitlab_id, 'updated_at' => now()->subDays(2)]);
