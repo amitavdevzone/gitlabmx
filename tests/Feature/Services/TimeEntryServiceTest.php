@@ -1,8 +1,11 @@
 <?php
 
 use App\Models\Client;
+use App\Models\Delivery;
+use App\Models\Estimate;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\TimeEntry;
 use App\Models\User;
 use App\Services\TimeEntryService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -69,4 +72,78 @@ it('throws 400 error if issue is not present', function () {
             ->and($e->getMessage())
             ->toBe('Issue not found');
     }
+});
+
+it('returns false when the issue is not present', function () {
+    // Arrange
+    $timeEntry = TimeEntry::factory()->make();
+    $service = app()->make(TimeEntryService::class);
+
+    // Act & Assert
+    expect($service->updateEstimateAndDelivery($timeEntry))->toBeFalse();
+});
+
+it('returns false when the time entry is not mapped to estimate', function () {
+    // Arrange
+    $timeEntry = TimeEntry::factory()
+        ->for(Issue::factory(['estimate_id' => null]))
+        ->create();
+    $service = app()->make(TimeEntryService::class);
+
+    // Act & Assert
+    expect($service->updateEstimateAndDelivery($timeEntry))->toBeFalse();
+});
+
+it('returns false when delivery is not present', function () {
+    $timeEntry = TimeEntry::factory()
+        ->for(Issue::factory(['estimate_id' => null]))
+        ->create();
+
+    $service = app()->make(TimeEntryService::class);
+
+    // Act & Assert
+    expect($service->updateEstimateAndDelivery($timeEntry))->toBeFalse();
+});
+
+it('updates the delivery and estimate completed hours', function () {
+    Event::fake();
+
+    // Arrange
+    $delivery = Delivery::factory()->create([
+        'is_complete' => 0,
+        'estimated_hours' => 1,
+        'progress_complete' => 0,
+        'completed_hours' => 0,
+    ]);
+    $estimate = Estimate::factory()->create([
+        'estimated_hours' => 1,
+        'delivery_id' => $delivery->id,
+        'progress_percentage' => 0,
+        'completed_hours' => 0,
+    ]);
+    $issue = Issue::factory()->create([
+        'estimate_id' => $estimate->id,
+    ]);
+
+    $timeEntry = TimeEntry::factory()
+        ->create([
+            'time' => 30,
+            'issue_id' => $issue->id,
+        ]);
+
+    // Act & Assert
+    $service = app()->make(TimeEntryService::class);
+    $service->updateEstimateAndDelivery($timeEntry);
+
+    $this->assertDatabaseHas('estimates', [
+        'id' => $estimate->id,
+        'estimated_hours' => 1,
+        'completed_hours' => 0.5,
+    ]);
+
+    $this->assertDatabaseHas('deliveries', [
+        'id' => $delivery->id,
+        'estimated_hours' => 1,
+        'completed_hours' => 0.5,
+    ]);
 });

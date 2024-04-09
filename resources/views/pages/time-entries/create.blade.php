@@ -46,6 +46,9 @@
                 <div class="w-2/3 flex flex-col">
                     <div class="mt-2 w-2/3">
                         <x-input-text name="time" label="" placeholder="Enter time in mins." />
+                        @error('time')
+                        <x-input-error message="{{$message}}" />
+                        @enderror
                     </div>
                 </div>
             </div>

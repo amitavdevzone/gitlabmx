@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Delivery;
+use App\Models\Estimate;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\TimeEntry;
@@ -13,9 +15,9 @@ class TimeEntryService
     /**
      * Helper function to get the hours for minutes
      */
-    public static function minutesToHours(int $minutes): int
+    public static function minutesToHours(int $minutes): float
     {
-        return $minutes / 60;
+        return round($minutes / 60, 2);
     }
 
     public function addTimeEntry(array $data): TimeEntry
@@ -63,5 +65,39 @@ class TimeEntryService
             ->whereNull('ended_at')
             ->orderByDesc('id')
             ->first();
+    }
+
+    public function updateEstimateAndDelivery(TimeEntry $timeEntry): bool
+    {
+        $issue = Issue::find($timeEntry->issue_id);
+
+        if (! $issue || ! $issue->estimate_id) {
+            return false;
+        }
+
+        $estimate = Estimate::findOrFail($issue->estimate_id);
+        $delivery = Delivery::findOrFail($estimate->delivery_id);
+
+        if (! $estimate || ! $delivery) {
+            return false;
+        }
+
+        $time = TimeEntryService::minutesToHours($timeEntry->time);
+
+        $estimate->completed_hours = $estimate->completed_hours + $time;
+        if ($estimate->estimated_hours > 0) {
+            // to avoid division by zero
+            $estimate->progress_percentage = round(($estimate->completed_hours / $estimate->estimated_hours) * 100, 2);
+        }
+        $estimate->save();
+
+        $delivery->completed_hours = $delivery->completed_hours + $time;
+        if ($delivery->estimated_hours > 0) {
+            // to avoid division by zero
+            $delivery->progress_complete = round(($delivery->completed_hours / $delivery->estimated_hours) * 100, 2);
+        }
+        $delivery->save();
+
+        return true;
     }
 }

@@ -46,7 +46,7 @@
                     </td>
                     <td>{{ $delivery->start_date->format('Y-m-d') }}</td>
                     <td>{{ $delivery->end_date->format('Y-m-d') }}</td>
-                    <td>{{ $delivery->progress_complete }}</td>
+                    <td>{{ $delivery->progress_complete }}%</td>
                     <td>{{ $delivery->estimated_hours }}</td>
                     <td>{{ $delivery->completed_hours }}</td>
                     <td>

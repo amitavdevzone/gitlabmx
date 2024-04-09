@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('is_complete')->index()->default(0);
-            $table->unsignedBigInteger('progress_complete')->default(0);
-            $table->unsignedBigInteger('estimated_hours')->default(0);
-            $table->unsignedBigInteger('completed_hours')->default(0);
+            $table->float('progress_complete', 2)->default(0);
+            $table->float('estimated_hours', 2)->default(0);
+            $table->float('completed_hours', 2)->default(0);
             $table->timestamps();
         });
     }

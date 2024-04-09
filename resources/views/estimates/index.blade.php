@@ -17,6 +17,7 @@
             <!-- head -->
             <thead>
             <tr>
+                <th>#</th>
                 <th></th>
                 <th>Title</th>
                 <th>Progress</th>
@@ -42,7 +43,7 @@
                         </div>
                     </td>
                     <td>{{ $estimate->title }}</td>
-                    <td>{{ $estimate->progress_percentage }}</td>
+                    <td>{{ $estimate->progress_percentage }}%</td>
                     <td>{{ $estimate->estimated_hours }}</td>
                     <td>{{ $estimate->completed_hours }}</td>
                 </tr>

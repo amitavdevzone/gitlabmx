@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('is_complete')->default(0)->index();
-            $table->unsignedInteger('progress_percentage')->default(0);
-            $table->unsignedInteger('estimated_hours')->default(0);
-            $table->unsignedInteger('completed_hours')->default(0);
+            $table->float('progress_percentage', 2)->default(0);
+            $table->float('estimated_hours', 2)->default(0);
+            $table->float('completed_hours', 2)->default(0);
             $table->timestamps();
         });
     }

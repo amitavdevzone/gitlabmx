@@ -49,7 +49,7 @@ class TimeEntryController extends Controller
 
         event(new EntryAddedEvent(Auth::user(), $entry));
 
-        return redirect()->back()->with('success', 'Entry added');
+        return redirect()->route('time-entries.create', ['issue_id' => $issue->id])->with('success', 'Entry added');
     }
 
     public function show($id)
