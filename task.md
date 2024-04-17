@@ -1,1 +1,2 @@
 - Handle the edit of an estimate
+- Ticket details - breadcrum Issue to Issues

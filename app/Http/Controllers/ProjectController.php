@@ -43,7 +43,7 @@ class ProjectController extends Controller
     {
         $clients = Client::query()
             ->select(['id', 'name'])
-            ->where('is_active', ClientStatusEnum::ACTIVE)
+            ->active()
             ->orderBy('name')
             ->get();
 

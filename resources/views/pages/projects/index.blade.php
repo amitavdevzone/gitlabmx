@@ -66,7 +66,9 @@
                                 </a>
                             </div>
                             <div>
-                                <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-ghost btn-xs">details</a>
+                                <a href="{{ route('projects.show', ['project' => $project->id]) }}" class="btn btn-ghost btn-xs">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </a>
                             </div>
                         </div>
                     </th>
