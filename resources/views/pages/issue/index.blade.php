@@ -7,6 +7,17 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Project', 'url' => route('projects.show', ['project' => $project])],
+            ['name' => $project->name],
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
     <div class="w-full bg-white rounded-md shadow-md px-6">
         @foreach($issues as $issue)

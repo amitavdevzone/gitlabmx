@@ -16,6 +16,8 @@
     @include('layout.navbar')
 @endauth
 <div class="container mx-auto min-h-screen">
+    @yield('breadcrumb')
+
     <div class="px-6">
         @yield('content')
     </div>

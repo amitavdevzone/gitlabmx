@@ -10,6 +10,16 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Projects'],
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
     <div class="overflow-x-auto bg-white rounded-md shadow-md p-6">
         <table class="table">

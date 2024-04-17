@@ -9,6 +9,18 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Project', 'url' => route('projects.show', ['project' => $project])],
+            ['name' => 'Issue', 'url' => route('issues.index', ['project' => $project])],
+            ['name' => $issue->title],
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
     <livewire:gitlab-issue-view :project="$project" :issue="$issue" />
 

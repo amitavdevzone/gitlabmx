@@ -6,8 +6,19 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Project', 'url' => route('projects.index')],
+            ['name' => 'Fetch project']
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
-    <div class="bg-white rounded-md shadow-md p-6">
+    <div class="bg-white rounded-md shadow-md p-6 w-3/4">
         @if(session('success'))
             <div role="alert" class="alert alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"

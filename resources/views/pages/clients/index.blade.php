@@ -9,6 +9,16 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Clients'],
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
     <div class="overflow-x-auto bg-white rounded-md shadow-md p-6">
         @if(session('success'))

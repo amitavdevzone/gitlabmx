@@ -6,6 +6,18 @@
     </div>
 @endsection
 
+@section('breadcrumb')
+    @php
+        $crumbs = [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Project', 'url' => route('projects.show', ['project' => $project])],
+            ['name' => 'Deliveries', 'url' => route('deliveries.index', ['project' => $project, 'delivery' => $delivery])],
+            ['name' => $delivery->title]
+        ];
+    @endphp
+    @include('components.breadcrumb', $crumbs)
+@endsection
+
 @section('content')
     <div class="bg-white rounded-md shadow-md p-6 w-3/4">
         @if(session('success'))

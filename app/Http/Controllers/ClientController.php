@@ -34,8 +34,10 @@ class ClientController extends Controller
             ->with('success', 'Client created');
     }
 
-    public function show($id)
+    public function show(Client $client)
     {
+        return view('pages.clients.show')
+            ->with('client', $client);
     }
 
     public function edit($id)

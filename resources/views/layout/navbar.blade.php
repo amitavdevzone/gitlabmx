@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<div class="bg-white shadow-sm mb-8">
+<div class="bg-white shadow-sm mb-4">
     <div class="container mx-auto py-6 flex items-center justify-between">
         @yield('title', config('app.name'))
     </div>
