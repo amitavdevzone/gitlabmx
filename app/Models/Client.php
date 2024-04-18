@@ -23,7 +23,7 @@ class Client extends Model
 
     public function scopeActive(Builder $query): void
     {
-        $query->where('is_active', ClientStatusEnum::INACTIVE);
+        $query->where('is_active', ClientStatusEnum::ACTIVE);
     }
 
     public function projects(): HasMany

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ClientStatusEnum;
 use App\Events\FetchGitlabProjectEvent;
-use App\Models\Client;
 use App\Models\Project;
+use App\Services\ClientService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -39,13 +38,9 @@ class ProjectController extends Controller
             ->with('success', 'Project queued for fetch');
     }
 
-    public function show(Project $project)
+    public function show(Project $project, ClientService $clientService)
     {
-        $clients = Client::query()
-            ->select(['id', 'name'])
-            ->active()
-            ->orderBy('name')
-            ->get();
+        $clients = $clientService->getClientDropdown();
 
         return view('pages.projects.show')
             ->with('clients', $clients)
