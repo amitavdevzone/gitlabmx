@@ -4,10 +4,13 @@ namespace App\Services;
 
 use App\Http\Integrations\Gitlab\GitlabConnector;
 use App\Http\Integrations\Gitlab\Requests\GitlabFetchProjectRequest;
+use App\Http\Integrations\Gitlab\Requests\GitlabFetchUser;
 use App\Models\Comment;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Models\User;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GitlabService
@@ -109,5 +112,33 @@ class GitlabService
                 'body' => $gitlabCommentData['note'],
             ]
         );
+    }
+
+    public function createUserByUsername(string $username): User
+    {
+        $connector = new GitlabConnector();
+        $request = new GitlabFetchUser();
+        $request->query()->add('username', $username);
+
+        $result = $connector->send($request);
+
+        if (! $result->successful()) {
+            throw new BadRequestException('The data provided was not correct');
+        }
+
+        if (empty($result->array())) {
+            throw new NotFoundHttpException('User not found with given username on Gitlab');
+        }
+
+        $data = collect($result->array())->first();
+
+        return User::create([
+            'name' => $data['name'] ?? '',
+            'gitlab_id' => $data['id'],
+            'gitlab_username' => $data['username'],
+            'email' => $data['username'].'@work.in',
+            'password' => 'Password@123',
+            'gitlab_data' => $data,
+        ]);
     }
 }

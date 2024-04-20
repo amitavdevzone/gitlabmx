@@ -20,6 +20,23 @@
                     <a href="{{route('projects.index')}}" class="py-6 block opacity-80
                     {{request()->routeIs('projects.index') ? 'border-b-2 border-blue-500' : ''}}">Projects</a>
                 </div>
+                <div class="group relative py-6">
+                    <button type="button" class="flex w-full items-center opacity-80">
+                        Manage
+                        <svg class="ms-2 size-4 flex-shrink-0"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                    </button>
+
+                    <div class="absolute z-10 mt-2 hidden w-48 rounded-lg bg-white p-2 shadow-md transition-[opacity,margin] duration-[150ms] group-hover:block dark:divide-gray-700 dark:border dark:border-gray-700 dark:bg-gray-800">
+                        <a class="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                           href="{{ route('users.index') }}">
+                            Users
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="group relative sm:py-4">
                 <button type="button" class="flex w-full items-center opacity-80">

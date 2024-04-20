@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('gitlab_id')->index()->unique()->nullable();
+            $table->string('gitlab_username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->json('gitlab_data')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

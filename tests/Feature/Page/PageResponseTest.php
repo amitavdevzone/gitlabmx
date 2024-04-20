@@ -132,3 +132,30 @@ it('shows the estimate list page', function () {
     // Assert
     get(route('estimates.index', ['project' => $project, 'delivery' => $delivery]))->assertOk();
 });
+
+it('shows the user listing page', function () {
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('users.index'))->assertOk();
+});
+
+it('shows the user create page', function () {
+    // Act
+    $this->actingAs(User::factory()->create());
+
+    // Assert
+    get(route('users.create'))->assertOk();
+});
+
+it('shows the user view page', function () {
+    // Arrange
+    $user = User::factory()->create();
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('users.show', ['user' => $user]))->assertOk();
+});

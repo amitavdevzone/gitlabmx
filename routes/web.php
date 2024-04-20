@@ -10,6 +10,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PageDashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimeEntryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
@@ -20,6 +21,12 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/dashboard', PageDashboardController::class)->name('dashboard');
     Route::resource('/clients', ClientController::class)->only(['index', 'create', 'show', 'store']);
+
+    /** Manage routes */
+    Route::group(['prefix' => 'manage'], function () {
+        Route::resource('users', UserController::class)
+            ->only(['index', 'create', 'store', 'show']);
+    });
 
     /** Project related routes are grouped here. */
     Route::resource('/projects', ProjectController::class);

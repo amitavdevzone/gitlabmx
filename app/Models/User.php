@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'gitlab_id',
+        'gitlab_username',
+        'gitlab_data',
     ];
 
     /**
@@ -42,6 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'gitlab_data' => 'json',
     ];
 
     public function issuesAssigned(): HasMany

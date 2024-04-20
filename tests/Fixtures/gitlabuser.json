@@ -1,0 +1,59 @@
+[
+    {
+        "id": 5,
+        "username": "amitav.roy",
+        "name": "Amitav Roy",
+        "state": "active",
+        "locked": false,
+        "avatar_url": "https://gitlab.focalworks.in/uploads/-/system/user/avatar/5/avatar.png",
+        "web_url": "https://gitlab.focalworks.in/amitav.roy",
+        "created_at": "2022-08-17T14:11:32.075+05:30",
+        "bio": "",
+        "location": "Maharashtra, India",
+        "public_email": "amitav.roy@work.in",
+        "skype": "amitav.skype",
+        "linkedin": "",
+        "twitter": "@amitavroy7",
+        "discord": "",
+        "website_url": "https://www.amitavroy.com",
+        "organization": "Focalworks",
+        "job_title": "",
+        "pronouns": "",
+        "bot": false,
+        "work_information": "Focalworks",
+        "local_time": "10:59 AM",
+        "last_sign_in_at": "2024-04-18T11:20:53.678+05:30",
+        "confirmed_at": "2022-08-17T14:11:31.486+05:30",
+        "last_activity_on": "2024-04-20",
+        "email": "amitav.roy@work.in",
+        "theme_id": 7,
+        "color_scheme_id": 1,
+        "projects_limit": 100000,
+        "current_sign_in_at": "2024-04-20T06:57:05.779+05:30",
+        "identities": [
+            {
+                "provider": "google_oauth2",
+                "extern_uid": "108349465462702635294"
+            }
+        ],
+        "can_create_group": false,
+        "can_create_project": true,
+        "two_factor_enabled": true,
+        "external": false,
+        "private_profile": false,
+        "commit_email": "amitav.roy@work.in",
+        "is_admin": true,
+        "note": "",
+        "namespace_id": 15,
+        "created_by": {
+            "id": 2,
+            "username": "admin.user",
+            "name": "Admin User",
+            "state": "active",
+            "locked": false,
+            "avatar_url": "",
+            "web_url": "https://gitlab.focalworks.in/admin.user"
+        },
+        "email_reset_offered_at": null
+    }
+]
