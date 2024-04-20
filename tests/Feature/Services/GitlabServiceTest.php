@@ -228,3 +228,16 @@ it('throws not found exception when empty response', function () {
     $service = app()->make(GitlabService::class);
     $service->createUserByUsername('user');
 })->throws(NotFoundHttpException::class);
+
+it('throws bad request exception if multiple users found', function () {
+    // Arrange
+    MockClient::global([
+        GitlabFetchUser::class => MockResponse::make(body: [
+            ['name' => 'A'], ['name' => 'B'],
+        ], status: 200),
+    ]);
+
+    // Act
+    $service = app()->make(GitlabService::class);
+    $service->createUserByUsername('user');
+})->throws(BadRequestException::class);

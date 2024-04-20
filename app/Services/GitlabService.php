@@ -130,7 +130,13 @@ class GitlabService
             throw new NotFoundHttpException('User not found with given username on Gitlab');
         }
 
-        $data = collect($result->array())->first();
+        $data = collect($result->array());
+
+        if ($data->count() > 1) {
+            throw new BadRequestException('More than one user found.');
+        }
+
+        $data = $data->first();
 
         return User::create([
             'name' => $data['name'] ?? '',

@@ -27,12 +27,12 @@ it('shows the user list sorted by name', function () {
     User::factory()->create(['name' => 'Jhon']);
 
     // Act
-    $this->actingAs($user);
+    $this->actingAs(User::factory()->create());
 
     // Assert
     get(route('users.index'))
         ->assertOk()
-        ->assertSeeTextInOrder([
+        ->assertSeeInOrder([
             'Amitav',
             'Jhon',
         ]);
