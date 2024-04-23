@@ -38,6 +38,9 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        return view('pages.users.show')
+            ->with('user', $user);
+
     }
 
     public function edit($id)
@@ -46,6 +49,15 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $data = $request->validate([
+            'name' => 'min:3',
+        ]);
+
+        User::where(['id' => $id])->update(['name' => $data['name']]);
+
+        return redirect()
+            ->route('users.show', ['user' => $id])
+            ->with('success', 'User data updated');
     }
 
     public function destroy($id)

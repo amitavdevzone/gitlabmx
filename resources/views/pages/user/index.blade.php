@@ -38,6 +38,7 @@
                 <th></th>
                 <th>Name</th>
                 <th>Username</th>
+                <th>Localtion</th>
             </tr>
             </thead>
             <tbody>
@@ -58,13 +59,16 @@
                     </td>
                     <td>
                         <span class="font-bold underline">
-                            <a href="{{ route('clients.show', ['client' => $user]) }}">{{ $user->name }}</a>
+                            <a href="{{ route('users.show', ['user' => $user]) }}">{{ $user->name }}</a>
                         </span>
                     </td>
                     <td>{{ $user->gitlab_username }}</td>
+                    <td>{{ $user->gitlab_data['location'] ?? 'Unknown' }}</td>
                     <th>
-                        <a href="#"
-                           class="btn btn-ghost btn-xs">details</a>
+                        <a href="{{ route('users.show', ['user' => $user]) }}"
+                           class="btn btn-ghost btn-xs">
+                            <span class="material-symbols-outlined">edit</span>
+                        </a>
                     </th>
                 </tr>
             @endforeach
