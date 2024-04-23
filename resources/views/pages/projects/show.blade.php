@@ -70,7 +70,8 @@
                 </div>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end items-center">
+                <a href="{{ route('projects.index') }}" class="mr-6">Back</a>
                 <button class="btn btn-primary text-white rounded">Save</button>
             </div>
         </form>

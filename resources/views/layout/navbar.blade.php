@@ -17,7 +17,7 @@
                     <a href="{{route('clients.index')}}" class="py-6 mr-4 block opacity-80
                     {{request()->routeIs('clients.index') ? 'border-b-2 border-blue-500' : ''}}">Clients</a>
 
-                    <a href="{{route('projects.index')}}" class="py-6 block opacity-80
+                    <a href="{{route('projects.index')}}" class="py-6 mr-4 block opacity-80
                     {{request()->routeIs('projects.index') ? 'border-b-2 border-blue-500' : ''}}">Projects</a>
                 </div>
                 <div class="group relative py-6">
