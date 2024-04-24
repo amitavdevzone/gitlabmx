@@ -19,6 +19,20 @@
 @endsection
 
 @section('content')
+    <div class="w-1/4">
+        <div role="tablist" class="tabs tabs-bordered">
+            <a role="tab"
+               class="tab {{ request()->input('state') == 'opened' ? 'tab-active' : '' }}"
+               href="{{ route('issues.index', ['project' => $project, 'state' => 'opened']) }}">
+                Opened
+            </a>
+            <a role="tab"
+               class="tab {{ request()->input('state') == 'closed' ? 'tab-active' : '' }}"
+               href="{{ route('issues.index', ['project' => $project, 'state' => 'closed']) }}">
+                Closed
+            </a>
+        </div>
+    </div>
     <div class="w-full bg-white rounded-md shadow-md px-6">
         @foreach($issues as $issue)
             <li class="block py-3 border-b border-gray-200 last:border-b-0">

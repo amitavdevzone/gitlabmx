@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\IssueStateEnum;
 use App\Models\Issue;
 use App\Models\Project;
 use App\Models\User;
@@ -169,5 +170,92 @@ it('shows the link to time entry', function () {
     // Assert
     get(route('issues.index', ['project' => $project]))
         ->assertSee(route('time-entries.create', ['issue_id' => $issue->id]))
+        ->assertOk();
+});
+
+it('shows only opened issues when no query is passed', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $openedIssue = Issue::factory()->create([
+        'title' => 'Active issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+    $closedIssue = Issue::factory()->closed()->create([
+        'title' => 'Inactive issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project]))
+        ->assertSee([
+            $openedIssue->title,
+        ])
+        ->assertDontSee([
+            $closedIssue->title,
+        ])
+        ->assertOk();
+});
+
+it('shows only opened issues when opened state is passed', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $openedIssue = Issue::factory()->create([
+        'title' => 'Active issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+    $closedIssue = Issue::factory()->closed()->create([
+        'title' => 'Inactive issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project, 'state' => IssueStateEnum::OPENED->value]))
+        ->assertSee([
+            $openedIssue->title,
+        ])
+        ->assertDontSee([
+            $closedIssue->title,
+        ])
+        ->assertOk();
+});
+
+it('shows only closed issues when closed state is passed', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $project = Project::factory()->create();
+    $activeIssue = Issue::factory()->create([
+        'title' => 'Active issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+    $closedIssue = Issue::factory()->closed()->create([
+        'title' => 'Inactive issue title',
+        'author_id' => $user->gitlab_id,
+        'project_id' => $project->project_id,
+    ]);
+
+    // Act
+    $this->actingAs($user);
+
+    // Assert
+    get(route('issues.index', ['project' => $project, 'state' => IssueStateEnum::CLOSED->value]))
+        ->assertSee([
+            $closedIssue->title,
+        ])
+        ->assertDontSee([
+            $activeIssue->title,
+        ])
         ->assertOk();
 });

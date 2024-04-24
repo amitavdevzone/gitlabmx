@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth:web']], function () {
     /** Manage routes */
     Route::group(['prefix' => 'manage'], function () {
         Route::resource('users', UserController::class)
-            ->only(['index', 'create', 'store', 'show']);
+            ->only(['index', 'create', 'store', 'show', 'update']);
     });
 
     /** Project related routes are grouped here. */
