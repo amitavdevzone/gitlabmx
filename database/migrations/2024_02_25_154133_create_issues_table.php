@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('internal_id')->index();
             $table->unsignedBigInteger('project_id')->index();
             $table->unsignedBigInteger('author_id')->index();
-            $table->unsignedBigInteger('assigned_to')->index();
+            $table->unsignedBigInteger('assigned_to')->nullable()->index();
             $table->unsignedBigInteger('closed_by')->nullable();
             $table->foreignIdFor(Estimate::class)->nullable()->index();
             $table->string('title');
