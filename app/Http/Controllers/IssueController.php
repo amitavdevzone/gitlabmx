@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\IssueStateEnum;
 use App\Models\Issue;
 use App\Models\Project;
+use App\Services\IssueService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class IssueController extends Controller
 {
-    public function index(Request $request, Project $project)
+    public function index(Request $request, Project $project, IssueService $issueService)
     {
         $state = $request->query('state', IssueStateEnum::OPENED->value);
 
@@ -18,14 +19,13 @@ class IssueController extends Controller
             throw new BadRequestException('Invalid issue status');
         }
 
-        $issues = Issue::query()
-            ->where('state', $state)
-            ->with(['assigned', 'author'])
-            ->where('project_id', $project->project_id)
-            ->latest('updated_at')
-            ->paginate(10);
+        $issues = $issueService->getIssueList(
+            state: $state,
+            project: $project
+        );
 
         return view('pages.issue.index')
+            ->with('state', $state)
             ->with('project', $project)
             ->with('issues', $issues);
     }
