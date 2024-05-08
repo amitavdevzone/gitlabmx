@@ -1,73 +1,134 @@
-version: "3.8"
+version: "3.9"
+
+networks:
+    appnet:
 
 services:
-    php:
-        image: serversideup/php:8.2-fpm-nginx-v2.2.1
-        container_name: "labmx-php"
+    nginx:
+        depends_on:
+            - php
+        build:
+            context: ./docker/nginx
+            dockerfile: nginx.dockerfile
         ports:
-            - "${DOCKER_APP_PORT:-8000}:80"
+            - ${APP_PORT:-80}:80
         volumes:
-            - .:/var/www/html
+            - ./src:/var/www/html:delegated
+        networks:
+            - appnet
+
+    php:
+        build:
+            context: ./docker/php
+            dockerfile: php.dockerfile
+            args:
+                - UID=${UID:-1000}
+                - GID=${GID:-1000}
+        ports:
+            - "9000:9000"
+        volumes:
+            - ./src:/var/www/html:delegated
+        networks:
+            - appnet
+
+    mysql:
+        image: mariadb:lts
+        restart: unless-stopped
+        tty: true
+        ports:
+            - ${DB_PORT:-3306}:3306
+        volumes:
+            - ./docker/data/mysql:/var/lib/mysql
+        networks:
+            - appnet
         environment:
-            SSL_MODE: "off"
-            PUID: '${UID:-1000}'
-            PGID: '${GID:-1000}'
+            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+            MARIADB_DATABASE: ${DB_DATABASE}
+
+    redis:
+        image: redis:alpine
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+        networks:
+            - appnet
+
+    composer:
+        depends_on:
+            - php
+        build:
+            context: ./docker/php
+            dockerfile: php.dockerfile
+            args:
+                - UID=${UID:-1000}
+                - GID=${GID:-1000}
+        entrypoint: ["composer", "--ignore-platform-reqs"]
+        volumes:
+            - ./src:/var/www/html
+        networks:
+            - appnet
+
+    artisan:
         depends_on:
             - mysql
-            - node
-            - redis
-        networks:
-            - development
-    node:
-        image: node:alpine3.19
-        container_name: "labmx-node"
-        working_dir: "/usr/app"
+        build:
+            context: ./docker/php
+            dockerfile: php.dockerfile
+            args:
+                - UID=${UID:-1000}
+                - GID=${GID:-1000}
+        entrypoint: ["php", "/var/www/html/artisan"]
         volumes:
-            - .:/usr/app
-        command: "npm run dev"
-        ports:
-            - "5173:5173"
+            - ./src:/var/www/html:delegated
         networks:
-            - development
-    dbadmin:
+            - appnet
+
+    phpmyadmin:
+        depends_on:
+            - mysql
         image: phpmyadmin
-        container_name: "labmx_dbadmin"
+        restart: always
         ports:
-            - "${DOCKER_DB_ADMIN_PORT:-8001}:80"
+            - 8080:80
+        networks:
+            - appnet
         environment:
             MYSQL_ROOT_PASSWORD: ${DB_USERNAME}
             MYSQL_USER: ${DB_USERNAME}
             MYSQL_PASSWORD: ${DB_PASSWORD}
             PMA_HOST: mysql
-        depends_on:
-         - mysql
+
+    node:
+        image: node:alpine3.19
+        working_dir: "/usr/app"
+        volumes:
+            - ./src:/usr/app
         networks:
-            - development
-    mysql:
-        image: mysql:8.3.0
-        container_name: "labmx-db"
+            - appnet
+
+    vite:
+        image: node:alpine3.19
+        working_dir: "/usr/app"
+        entrypoint: ["npm", "run", "dev"]
+        volumes:
+            - ./src:/usr/app
         ports:
-            - "3306:3306" # Adjust port if needed
+            - "${NODE_PORT:-5173}:5173"
+        networks:
+            - appnet
+
+    mailpit:
+        container_name: "mailpit"
+        image: axllent/mailpit:v1.16
+        restart: unless-stopped
+        ports:
+            - ${MAILPIT_WEBUI:-8025}:8025
+            - ${MAILPIT_SMTP:-1025}:1025
+        volumes:
+            - ./docker/data/mailpit:/data
+        networks:
+            - appnet
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-        volumes:
-            - ./data/mysql-data:/var/lib/mysql
-        networks:
-            - development
-    redis:
-        image: redis:7.2.4
-        container_name: "labmx-redis"
-        ports:
-            - "63790:63790" # Adjust port if needed
-        volumes:
-            - ./data/redis-data:/data
-        networks:
-            - development
-volumes:
-    mysql-data: {}
-    redis-data: {}
-networks:
-    development:
+            MP_DATABASE: /data/mailpit.db
+            MP_SMTP_AUTH_ALLOW_INSECURE: true
+            MP_MAX_MESSAGES: ${MAILPIT_MESSAGES:-100}
