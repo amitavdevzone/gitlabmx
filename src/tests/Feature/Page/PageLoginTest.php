@@ -37,11 +37,11 @@ it('shows error if password is wrong', function () {
 
 it('redirects to home if login is successful', function () {
     // Arrange
-    $password = 'safepass';
-    $user = User::factory()->create(['password' => $password]);
+    $safeWord = 'safepass';
+    $user = User::factory()->create(['password' => $safeWord]);
 
     // Act & Assert
-    $credentials = ['email' => $user->email, 'password' => $password];
+    $credentials = ['email' => $user->email, 'password' => $safeWord];
     post(route('login.handle'), $credentials)
         ->assertRedirectToRoute('dashboard')
         ->assertSessionHas('success');
@@ -49,11 +49,11 @@ it('redirects to home if login is successful', function () {
 
 it('remembers login if checked', function () {
     // Arrange
-    $password = 'safepass';
-    $user = User::factory()->create(['password' => $password]);
+    $safeWord = 'safepass';
+    $user = User::factory()->create(['password' => $safeWord]);
 
     // Act & Assert
-    $credentials = ['email' => $user->email, 'password' => $password];
+    $credentials = ['email' => $user->email, 'password' => $safeWord];
     post(route('login.handle'), $credentials)
         ->assertRedirect(route('dashboard')); // TODO: Amitav to check how we can assert remember me cookie
 });
@@ -61,11 +61,11 @@ it('remembers login if checked', function () {
 it('raises an event when user logs in', function () {
     // Arrange
     Event::fake();
-    $password = 'safepass';
-    $user = User::factory()->create(['password' => $password]);
+    $safeWord = 'safepass';
+    $user = User::factory()->create(['password' => $safeWord]);
 
     // Act
-    $credentials = ['email' => $user->email, 'password' => $password];
+    $credentials = ['email' => $user->email, 'password' => $safeWord];
     post(route('login.handle'), $credentials);
 
     // Assert

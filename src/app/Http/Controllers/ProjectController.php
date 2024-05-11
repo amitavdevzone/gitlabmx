@@ -47,10 +47,6 @@ class ProjectController extends Controller
             ->with('project', $project);
     }
 
-    public function edit($id)
-    {
-    }
-
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -66,9 +62,5 @@ class ProjectController extends Controller
         return redirect()
             ->route('projects.show', ['project' => $id])
             ->with('success', 'Project updated');
-    }
-
-    public function destroy($id)
-    {
     }
 }

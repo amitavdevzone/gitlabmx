@@ -49,20 +49,4 @@ class EstimateController extends Controller
             ->route('estimates.index', ['project' => $project, 'delivery' => $delivery])
             ->with('success', 'Estimate created successfully');
     }
-
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
-    }
 }

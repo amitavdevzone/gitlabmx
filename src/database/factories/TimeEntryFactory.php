@@ -19,7 +19,7 @@ class TimeEntryFactory extends Factory
             'client_id' => Client::factory(),
             'project_id' => Project::factory(),
             'description' => fake()->sentence(),
-            'time' => rand(5, 120),
+            'time' => $this->faker->numberBetween(5, 120),
             'started_at' => now(),
         ];
     }

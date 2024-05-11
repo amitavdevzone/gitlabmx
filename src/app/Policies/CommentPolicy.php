@@ -38,9 +38,11 @@ class CommentPolicy
 
     public function restore(User $user, Comment $comment): bool
     {
+        return false;
     }
 
     public function forceDelete(User $user, Comment $comment): bool
     {
+        return false;
     }
 }

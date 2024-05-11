@@ -49,10 +49,6 @@ class DeliveryController extends Controller
             ->with('success', 'Delivery details saved.');
     }
 
-    public function show($id)
-    {
-    }
-
     public function edit(Project $project, Delivery $delivery)
     {
         return view('pages.deliveries.edit')
@@ -70,9 +66,5 @@ class DeliveryController extends Controller
         return redirect()
             ->route('deliveries.edit', ['project' => $project, 'delivery' => $delivery])
             ->with('success', 'Delivery edited');
-    }
-
-    public function destroy($id)
-    {
     }
 }

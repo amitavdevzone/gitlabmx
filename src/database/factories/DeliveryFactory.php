@@ -22,7 +22,7 @@ class DeliveryFactory extends Factory
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
             'start_date' => Carbon::now(),
-            'end_date' => Carbon::now()->addDays(rand(5, 20)),
+            'end_date' => Carbon::now()->addDays($this->faker->numberBetween(5, 20)),
             'is_complete' => $this->faker->boolean(),
             'progress_complete' => $this->faker->randomNumber(),
             'estimated_hours' => $this->faker->randomNumber(),

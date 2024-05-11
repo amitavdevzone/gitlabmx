@@ -22,7 +22,7 @@
             @endif
             <div class="flex mb-8">
                 <h2 class="font-bold text-xl">
-                    <a href="{{ route('issues.show', ['project' => $issue->project_id, 'issue' => $issue]) }}" target="_blank">
+                    <a href="{{ route('issues.show', ['project' => $issue->project_id, 'issue' => $issue]) }}" target="_blank" rel="noopener">
                         #{{ $issue->internal_id }} {{ $issue->title }}
                     </a>
                 </h2>

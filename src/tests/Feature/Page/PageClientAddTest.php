@@ -45,10 +45,11 @@ it('saves the client to db', function () {
     $this->actingAs($user);
 
     // Assert
-    post(route('clients.store'), ['name' => 'My first client']);
+    $matchName = 'My first client';
+    post(route('clients.store'), ['name' => $matchName]);
 
     $this->assertDatabaseCount('clients', 1);
-    $this->assertDatabaseHas('clients', ['name' => 'My first client']);
+    $this->assertDatabaseHas('clients', ['name' => $matchName]);
 });
 
 it('does not save a duplicate client', function () {
@@ -72,10 +73,11 @@ it('makes new client active', function () {
     $this->actingAs($user);
 
     // Assert
-    post(route('clients.store'), ['name' => 'My first client']);
+    $clientMatch = 'My first client';
+    post(route('clients.store'), ['name' => $clientMatch]);
 
     $this->assertDatabaseCount('clients', 1);
-    $this->assertDatabaseHas('clients', ['name' => 'My first client', 'is_active' => ClientStatusEnum::ACTIVE]);
+    $this->assertDatabaseHas('clients', ['name' => $clientMatch, 'is_active' => ClientStatusEnum::ACTIVE]);
 });
 
 it('redirects back after client is saved', function () {

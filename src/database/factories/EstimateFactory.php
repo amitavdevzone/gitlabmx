@@ -22,7 +22,7 @@ class EstimateFactory extends Factory
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
             'is_complete' => false,
-            'progress_percentage' => rand(0, 100),
+            'progress_percentage' => $this->faker->numberBetween(0, 100),
             'estimated_hours' => $this->faker->randomNumber(),
             'completed_hours' => $this->faker->randomNumber(),
         ];

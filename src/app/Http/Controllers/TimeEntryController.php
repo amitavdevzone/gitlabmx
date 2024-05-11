@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TimeEntryController extends Controller
 {
-    public function index()
-    {
-
-    }
-
     public function create(Request $request)
     {
         if (! $request->has('issue_id')) {
@@ -50,21 +45,5 @@ class TimeEntryController extends Controller
         event(new EntryAddedEvent(Auth::user(), $entry));
 
         return redirect()->route('time-entries.create', ['issue_id' => $issue->id])->with('success', 'Entry added');
-    }
-
-    public function show($id)
-    {
-    }
-
-    public function edit($id)
-    {
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
     }
 }

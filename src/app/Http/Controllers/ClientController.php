@@ -39,16 +39,4 @@ class ClientController extends Controller
         return view('pages.clients.show')
             ->with('client', $client);
     }
-
-    public function edit($id)
-    {
-    }
-
-    public function update(Request $request, $id)
-    {
-    }
-
-    public function destroy($id)
-    {
-    }
 }

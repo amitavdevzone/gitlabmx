@@ -43,10 +43,6 @@ class UserController extends Controller
 
     }
 
-    public function edit($id)
-    {
-    }
-
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -58,9 +54,5 @@ class UserController extends Controller
         return redirect()
             ->route('users.show', ['user' => $id])
             ->with('success', 'User data updated');
-    }
-
-    public function destroy($id)
-    {
     }
 }

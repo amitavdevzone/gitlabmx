@@ -45,7 +45,7 @@
                                 </a>
                             </div>
                             <div class="material-symbols-outlined ml-2 hover:text-purple-700">
-                                <a href="{{ route('time-entries.create', ['issue_id' => $issue->id]) }}" target="_blank">play_circle</a>
+                                <a href="{{ route('time-entries.create', ['issue_id' => $issue->id]) }}" target="_blank" rel="noopener">play_circle</a>
                             </div>
                         </div>
                         <div class="text-sm text-gray-400 flex">
