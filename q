@@ -23,6 +23,11 @@ elif [[ "$1" == "node" ]]; then
     docker compose run --rm node "$@"
 elif [[ "$1" == "ps" ]]; then
     docker ps --format 'table {{.ID}}\t{{.Status}}\t{{.Names}}\t{{.Ports}}'
+elif [[ "$1" == "up" ]]; then
+    shift
+    docker compose --env-file ./src/.env up "$@"
+elif [[ "$1" == "down" ]]; then
+    docker compose --env-file ./src/.env down --remove-orphans
 
 # Add more elif blocks for other shortcuts
 else
@@ -30,6 +35,8 @@ else
     echo "Available commands:"
     echo "
     ps         show the docker processes
+    up         start the compose services
+    down         stop the composer services
     composer   run composer commands
     php        run commands inside php container
     artisan    run artisan commands

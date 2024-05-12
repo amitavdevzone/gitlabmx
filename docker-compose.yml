@@ -1,135 +1,134 @@
-version: "3.9"
-
 networks:
-    appnet:
+  appnet:
 
 services:
-    nginx:
-        depends_on:
-            - php
-        build:
-            context: ./docker/nginx
-            dockerfile: nginx.dockerfile
-        ports:
-            - ${APP_PORT:-80}:80
-        volumes:
-            - ./src:/var/www/html:delegated
-        networks:
-            - appnet
+  nginx:
+    depends_on:
+      - php
+    build:
+      context: ./docker/nginx
+      dockerfile: nginx.dockerfile
+    ports:
+      - ${APP_PORT:-80}:80
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - appnet
 
-    php:
-        restart: unless-stopped
-        build:
-            context: ./docker/php
-            dockerfile: php.dockerfile
-            args:
-                - UID=${UID:-1000}
-                - GID=${GID:-1000}
-        ports:
-            - "9000:9000"
-        volumes:
-            - ./src:/var/www/html:delegated
-        networks:
-            - appnet
+  php:
+    restart: unless-stopped
+    build:
+      context: ./docker/php
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - appnet
 
-    mysql:
-        image: mariadb:lts
-        restart: unless-stopped
-        tty: true
-        ports:
-            - ${DB_PORT:-3306}:3306
-        volumes:
-            - ./docker/data/mysql:/var/lib/mysql
-        networks:
-            - appnet
-        environment:
-            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
-            MARIADB_DATABASE: ${DB_DATABASE}
+  mysql:
+    image: mariadb:lts
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT:-3306}:3306
+    volumes:
+      - ./docker/data/mysql:/var/lib/mysql
+    networks:
+      - appnet
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+      MARIADB_DATABASE: ${DB_DATABASE}
 
-    redis:
-        image: redis:alpine
-        restart: unless-stopped
-        ports:
-            - "6379:6379"
-        networks:
-            - appnet
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - appnet
 
-    composer:
-        depends_on:
-            - php
-        build:
-            context: ./docker/php
-            dockerfile: php.dockerfile
-            args:
-                - UID=${UID:-1000}
-                - GID=${GID:-1000}
-        entrypoint: ["composer"]
-        volumes:
-            - ./src:/var/www/html
-        networks:
-            - appnet
+  composer:
+    depends_on:
+      - php
+    build:
+      context: ./docker/php
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    entrypoint: ["composer"]
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - appnet
 
-    artisan:
-        depends_on:
-            - mysql
-        build:
-            context: ./docker/php
-            dockerfile: php.dockerfile
-            args:
-                - UID=${UID:-1000}
-                - GID=${GID:-1000}
-        entrypoint: ["php", "/var/www/html/artisan"]
-        volumes:
-            - ./src:/var/www/html:delegated
-        networks:
-            - appnet
+  artisan:
+    depends_on:
+      - mysql
+    build:
+      context: ./docker/php
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    entrypoint: ["php", "/var/www/html/artisan"]
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - appnet
 
-    phpmyadmin:
-        depends_on:
-            - mysql
-        image: phpmyadmin
-        restart: always
-        ports:
-            - 8080:80
-        networks:
-            - appnet
-        environment:
-            MYSQL_ROOT_PASSWORD: ${DB_USERNAME}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            PMA_HOST: mysql
+  phpmyadmin:
+    env_file:
+      - ./src/.env
+    depends_on:
+      - mysql
+    image: phpmyadmin
+    restart: always
+    ports:
+      - ${DB_ADMIN_PORT:-8000}:80
+    networks:
+      - appnet
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      PMA_HOST: mysql
 
-    node:
-        image: node:alpine3.19
-        working_dir: "/usr/app"
-        volumes:
-            - ./src:/usr/app
-        networks:
-            - appnet
+  node:
+    image: node:alpine3.19
+    working_dir: "/usr/app"
+    volumes:
+      - ./src:/usr/app
+    networks:
+      - appnet
 
-    vite:
-        image: node:alpine3.19
-        working_dir: "/usr/app"
-        entrypoint: ["npm", "run", "dev"]
-        volumes:
-            - ./src:/usr/app
-        ports:
-            - "${NODE_PORT:-5173}:5173"
-        networks:
-            - appnet
+  vite:
+    image: node:alpine3.19
+    working_dir: "/usr/app"
+    entrypoint: ["npm", "run", "dev"]
+    volumes:
+      - ./src:/usr/app
+    ports:
+      - "${NODE_PORT:-5173}:5173"
+    networks:
+      - appnet
 
-    mailpit:
-        container_name: "mailpit"
-        image: axllent/mailpit:v1.16
-        restart: unless-stopped
-        ports:
-            - ${MAILPIT_WEBUI:-8025}:8025
-            - ${MAILPIT_SMTP:-1025}:1025
-        volumes:
-            - ./docker/data/mailpit:/data
-        networks:
-            - appnet
-        environment:
-            MP_DATABASE: /data/mailpit.db
-            MP_SMTP_AUTH_ALLOW_INSECURE: true
-            MP_MAX_MESSAGES: ${MAILPIT_MESSAGES:-100}
+  mailpit:
+    container_name: "mailpit"
+    image: axllent/mailpit:v1.16
+    restart: unless-stopped
+    ports:
+      - ${MAILPIT_WEBUI:-8025}:8025
+      - ${MAILPIT_SMTP:-1025}:1025
+    volumes:
+      - ./docker/data/mailpit:/data
+    networks:
+      - appnet
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ALLOW_INSECURE: true
+      MP_MAX_MESSAGES: ${MAILPIT_MESSAGES:-100}
