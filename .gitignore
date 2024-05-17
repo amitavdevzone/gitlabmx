@@ -1,3 +1,5 @@
+.idea
+!docker/data
+docker/data/*
 .DS_Store
 *.pem
-.idea
