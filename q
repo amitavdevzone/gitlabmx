@@ -17,7 +17,7 @@ elif [[ "$1" == "artisan" ]]; then
     docker compose run --rm artisan "$@"
 elif [[ "$1" == "vite" ]]; then
     shift
-    docker compose run --rm node npm run dev
+    docker compose run --rm vite npm run dev
 elif [[ "$1" == "node" ]]; then
     shift
     docker compose run --rm node "$@"
